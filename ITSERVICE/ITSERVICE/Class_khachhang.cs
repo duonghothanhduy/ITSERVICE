@@ -122,5 +122,61 @@ namespace ITSERVICE
             }
         }
 
+        public void xuatfile(FORM_KHACHHANG f)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "Excel (2003)(.xls)|*.xls|Excel (2010) (.xlsx)|*.xlsx |RichText File (.rtf)|*.rtf |Pdf File (.pdf)|*.pdf |Html File (.html)|*.html";
+                if (saveDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    string exportFilePath = saveDialog.FileName;
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension;
+
+                    switch (fileExtenstion)
+                    {
+                        case ".xls":
+                            f.gv_khachhang.ExportToXls(exportFilePath);
+                            break;
+                        case ".xlsx":
+                            f.gv_khachhang.ExportToXlsx(exportFilePath);
+                            break;
+                        case ".rtf":
+                            f.gv_khachhang.ExportToRtf(exportFilePath);
+                            break;
+                        case ".pdf":
+                            f.gv_khachhang.ExportToPdf(exportFilePath);
+                            break;
+                        case ".html":
+                            f.gv_khachhang.ExportToHtml(exportFilePath);
+                            break;
+                        case ".mht":
+                            f.gv_khachhang.ExportToMht(exportFilePath);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (File.Exists(exportFilePath))
+                    {
+                        try
+                        {
+                            //Try to open the file and let windows decide how to open it.
+                            System.Diagnostics.Process.Start(exportFilePath);
+                        }
+                        catch
+                        {
+                            String msg = "The file could not be opened." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                            MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        String msg = "The file could not be saved." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                        MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -92,6 +92,11 @@ namespace ITSERVICE
             class_kh.reset(this);
         }
 
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            class_kh.xuatfile(this);
+        }
+
      
     }
 }

@@ -24,5 +24,11 @@ namespace ITSERVICE
         {
             label1.Text = search.EditValue.ToString();
         }
+
+        private void barLargeButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FORM_KHACHHANG f = new FORM_KHACHHANG();
+            f.Show();
+        }
     }
 }

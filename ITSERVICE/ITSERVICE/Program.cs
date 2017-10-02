@@ -22,7 +22,7 @@ namespace ITSERVICE
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-            Application.Run(new FORM_KHACHHANG());
+            Application.Run(new DANGNHAP());
         }
     }
 }

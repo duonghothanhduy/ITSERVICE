@@ -213,6 +213,7 @@
             this.simpleButton1.Size = new System.Drawing.Size(91, 35);
             this.simpleButton1.TabIndex = 11;
             this.simpleButton1.Text = "Export";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // cbb_acction
             // 

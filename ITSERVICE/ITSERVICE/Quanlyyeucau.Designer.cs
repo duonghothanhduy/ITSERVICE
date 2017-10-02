@@ -175,6 +175,7 @@
             this.barLargeButtonItem5.Caption = "Khách Hàng";
             this.barLargeButtonItem5.Id = 9;
             this.barLargeButtonItem5.Name = "barLargeButtonItem5";
+            this.barLargeButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItem5_ItemClick);
             // 
             // barLargeButtonItem3
             // 

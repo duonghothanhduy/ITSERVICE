@@ -179,7 +179,7 @@ namespace ITSERVICE
                 }
             }
         }
-
+        //ddddddd
         public void timkiemkh(FORM_KHACHHANG f)
         {
             if(f.searchkh.Text !="")

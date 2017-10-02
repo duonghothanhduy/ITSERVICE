@@ -22,16 +22,6 @@ namespace ITSERVICE
             class_kh.loaddulieu(this);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = searchControl1.EditValue.ToString();
-        }
-
-        private void searchControl1_EditValueChanged(object sender, EventArgs e)
-        {
-            this.AcceptButton = search;
-        }
-
         //show du lieu qua ben phai~ khi click vao gridview
         private void gv_khachhang_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
@@ -96,6 +86,25 @@ namespace ITSERVICE
         {
             class_kh.xuatfile(this);
         }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            class_kh.timkiemkh(this);
+        }
+
+        private void searchkh_EditValueChanged(object sender, EventArgs e)
+        {
+            this.AcceptButton = search;
+        }
+
+        private void bt_reload_Click(object sender, EventArgs e)
+        {
+            class_kh.loaddulieu(this);
+            searchkh.Text = "";
+        }
+
+
+        
 
      
     }

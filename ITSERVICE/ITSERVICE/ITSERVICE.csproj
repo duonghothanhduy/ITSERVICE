@@ -77,7 +77,7 @@
     <Compile Include="KHACHHANG.Designer.cs">
       <DependentUpon>KHACHHANG.cs</DependentUpon>
     </Compile>
-    <Compile Include="LQTOSQL\Class_checker_khachhang.cs" />
+    <Compile Include="Class_checker_khachhang.cs" />
     <Compile Include="LQTOSQL\Data_itservice.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

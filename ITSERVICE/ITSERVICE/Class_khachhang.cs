@@ -7,6 +7,7 @@ using ITSERVICE.LQTOSQL;
 using DevExpress.XtraGrid;
 using System.Windows.Forms;
 using System.IO;
+using DevExpress.XtraEditors;
 
 
 namespace ITSERVICE
@@ -122,6 +123,7 @@ namespace ITSERVICE
             }
         }
 
+        //xuat file
         public void xuatfile(FORM_KHACHHANG f)
         {
             using (SaveFileDialog saveDialog = new SaveFileDialog())
@@ -178,5 +180,24 @@ namespace ITSERVICE
             }
         }
 
+        public void timkiemkh(FORM_KHACHHANG f)
+        {
+            if(f.searchkh.Text !="")
+            {
+                var sql = data.database().KHACHHANGs.Where(a => a.MAKH == f.searchkh.Text || a.HOTEN_KH==f.searchkh.Text);
+                if(sql!=null)
+                {
+                    f.gctr_khachhang.DataSource = sql;
+                }
+                else
+                {
+                    XtraMessageBox.Show("Tên khách hàng hoặc mã khách hàng không tồn tại!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("Hãy nhập Tên hoặc Mã Khách Hàng Cần tìm", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

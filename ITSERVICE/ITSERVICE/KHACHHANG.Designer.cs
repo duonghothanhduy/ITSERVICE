@@ -30,15 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FORM_KHACHHANG));
-            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.searchkh = new DevExpress.XtraEditors.SearchControl();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.search = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.button1 = new System.Windows.Forms.Button();
-            this.sx_makh = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -60,7 +57,8 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txt_makh = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            this.bt_reload = new DevExpress.XtraEditors.SimpleButton();
+            ((System.ComponentModel.ISupportInitialize)(this.searchkh.Properties)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -73,22 +71,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.txt_makh.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // searchControl1
+            // searchkh
             // 
-            this.searchControl1.EditValue = "Mã hoặc Tên Nhân Viên";
-            this.searchControl1.Location = new System.Drawing.Point(6, 20);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.Appearance.BackColor = System.Drawing.Color.SlateGray;
-            this.searchControl1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.searchControl1.Properties.Appearance.Options.UseBackColor = true;
-            this.searchControl1.Properties.Appearance.Options.UseForeColor = true;
-            this.searchControl1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.searchkh.EditValue = "Mã hoặc Tên Khách Hàng";
+            this.searchkh.Location = new System.Drawing.Point(6, 20);
+            this.searchkh.Name = "searchkh";
+            this.searchkh.Properties.Appearance.BackColor = System.Drawing.Color.SlateGray;
+            this.searchkh.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.searchkh.Properties.Appearance.Options.UseBackColor = true;
+            this.searchkh.Properties.Appearance.Options.UseForeColor = true;
+            this.searchkh.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.searchkh.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Repository.ClearButton(),
             new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Size = new System.Drawing.Size(346, 20);
-            this.searchControl1.TabIndex = 1;
-            this.searchControl1.EditValueChanged += new System.EventHandler(this.searchControl1_EditValueChanged);
+            this.searchkh.Size = new System.Drawing.Size(346, 20);
+            this.searchkh.TabIndex = 1;
+            this.searchkh.EditValueChanged += new System.EventHandler(this.searchkh_EditValueChanged);
             // 
             // directorySearcher1
             // 
@@ -108,7 +106,7 @@
             this.search.TabIndex = 5;
             this.search.Text = "Search";
             this.search.UseVisualStyleBackColor = true;
-            this.search.Click += new System.EventHandler(this.button1_Click);
+            this.search.Click += new System.EventHandler(this.search_Click);
             // 
             // textBox1
             // 
@@ -126,38 +124,6 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "label1";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(478, 20);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(32, 17);
-            this.labelControl2.TabIndex = 8;
-            this.labelControl2.Text = "Sort:";
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.Image = global::ITSERVICE.Properties.Resources.if_sort_ascend_600291;
-            this.button1.Location = new System.Drawing.Point(514, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // sx_makh
-            // 
-            this.sx_makh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.sx_makh.Image = global::ITSERVICE.Properties.Resources.if_sort_descend_849171;
-            this.sx_makh.Location = new System.Drawing.Point(539, 18);
-            this.sx_makh.Name = "sx_makh";
-            this.sx_makh.Size = new System.Drawing.Size(23, 23);
-            this.sx_makh.TabIndex = 6;
-            this.sx_makh.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -187,13 +153,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.bt_reload);
             this.groupBox2.Controls.Add(this.simpleButton1);
             this.groupBox2.Controls.Add(this.cbb_acction);
-            this.groupBox2.Controls.Add(this.searchControl1);
+            this.groupBox2.Controls.Add(this.searchkh);
             this.groupBox2.Controls.Add(this.search);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.sx_makh);
-            this.groupBox2.Controls.Add(this.labelControl2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox2.Location = new System.Drawing.Point(0, 91);
@@ -434,6 +398,19 @@
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Mã khách hàng:";
             // 
+            // bt_reload
+            // 
+            this.bt_reload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_reload.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_reload.Appearance.Options.UseFont = true;
+            this.bt_reload.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
+            this.bt_reload.Location = new System.Drawing.Point(439, 10);
+            this.bt_reload.Name = "bt_reload";
+            this.bt_reload.Size = new System.Drawing.Size(95, 37);
+            this.bt_reload.TabIndex = 12;
+            this.bt_reload.Text = "Reload";
+            this.bt_reload.Click += new System.EventHandler(this.bt_reload_Click);
+            // 
             // FORM_KHACHHANG
             // 
             this.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(73)))), ((int)(((byte)(88)))));
@@ -449,11 +426,10 @@
             this.Name = "FORM_KHACHHANG";
             this.Text = "KHACHHANG";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchkh.Properties)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gctr_khachhang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_khachhang)).EndInit();
@@ -470,15 +446,10 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.SearchControl searchControl1;
         private System.DirectoryServices.DirectorySearcher directorySearcher1;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
-        private System.Windows.Forms.Button search;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button sx_makh;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
@@ -500,5 +471,8 @@
         public DevExpress.XtraEditors.TextEdit txt_makh;
         public DevExpress.XtraEditors.TextEdit txt_sodthKH;
         public System.Windows.Forms.ComboBox cbb_acction;
+        public DevExpress.XtraEditors.SearchControl searchkh;
+        public System.Windows.Forms.Button search;
+        private DevExpress.XtraEditors.SimpleButton bt_reload;
     }
 }

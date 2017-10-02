@@ -1,0 +1,12 @@
+D:\baitap\DACN\ITSERVICE\ITSERVICE\bin\Debug\ITSERVICE.exe
+D:\baitap\DACN\ITSERVICE\ITSERVICE\bin\Debug\ITSERVICE.pdb
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.Properties.Resources.resources
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.csproj.GenerateResource.Cache
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.exe
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.pdb
+D:\baitap\DACN\ITSERVICE\ITSERVICE\bin\Debug\ITSERVICE.exe.config
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.exe.licenses
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.DANGNHAP.resources
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.QUANLYYEUCAU.resources
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.csprojResolveAssemblyReference.cache
+D:\baitap\DACN\ITSERVICE\ITSERVICE\obj\Debug\ITSERVICE.FORM_KHACHHANG.resources

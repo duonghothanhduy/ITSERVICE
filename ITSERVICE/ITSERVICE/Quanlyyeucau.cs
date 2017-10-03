@@ -30,5 +30,12 @@ namespace ITSERVICE
             FORM_KHACHHANG f = new FORM_KHACHHANG();
             f.Show();
         }
+
+        private void barLargeButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.Close();
+            DANGNHAP f = new DANGNHAP();
+            f.Show();
+        }
     }
 }

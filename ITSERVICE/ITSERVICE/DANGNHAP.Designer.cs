@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DANGNHAP));
             this.txt_loginname = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -92,6 +93,7 @@
             this.bt_dangnhap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_dangnhap.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_dangnhap.Appearance.Options.UseFont = true;
+            this.bt_dangnhap.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
             this.bt_dangnhap.Location = new System.Drawing.Point(592, 458);
             this.bt_dangnhap.Name = "bt_dangnhap";
             this.bt_dangnhap.Size = new System.Drawing.Size(86, 27);
@@ -111,6 +113,8 @@
             this.Controls.Add(this.txt_password);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txt_loginname);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.LookAndFeel.SkinName = "iMaginary";
             this.Name = "DANGNHAP";
             this.Text = "Đăng nhập";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

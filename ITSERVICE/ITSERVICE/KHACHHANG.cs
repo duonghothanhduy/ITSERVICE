@@ -63,6 +63,10 @@ namespace ITSERVICE
 
         private void bt_apply_Click(object sender, EventArgs e)
         {
+            if(action==0)
+            {
+                XtraMessageBox.Show("Hãy chọn công việc muốn thực hiện trên mục Action!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             if (action == 1)
             {
                 class_kh.addkhachhang(this);
@@ -102,10 +106,5 @@ namespace ITSERVICE
             class_kh.loaddulieu(this);
             searchkh.Text = "";
         }
-
-
-        
-
-     
     }
 }

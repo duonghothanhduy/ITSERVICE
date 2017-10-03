@@ -179,12 +179,14 @@ namespace ITSERVICE
                 }
             }
         }
-        //ddddddd
+        
+
+        //tim kiem kh
         public void timkiemkh(FORM_KHACHHANG f)
         {
             if(f.searchkh.Text !="")
             {
-                var sql = data.database().KHACHHANGs.Where(a => a.MAKH == f.searchkh.Text || a.HOTEN_KH==f.searchkh.Text);
+                var sql = data.database().PROC_KHACHHANG().Where(a => a.MAKH == f.searchkh.Text || a.HOTEN_KH==f.searchkh.Text);
                 if(sql!=null)
                 {
                     f.gctr_khachhang.DataSource = sql;

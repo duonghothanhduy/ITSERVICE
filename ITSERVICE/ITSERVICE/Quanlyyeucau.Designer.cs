@@ -223,6 +223,7 @@
             this.barLargeButtonItem7.Caption = "Đăng Xuất";
             this.barLargeButtonItem7.Id = 15;
             this.barLargeButtonItem7.Name = "barLargeButtonItem7";
+            this.barLargeButtonItem7.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItem7_ItemClick);
             // 
             // bar3
             // 
@@ -242,31 +243,31 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(881, 68);
+            this.barDockControlTop.Size = new System.Drawing.Size(881, 63);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 641);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 640);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(881, 19);
+            this.barDockControlBottom.Size = new System.Drawing.Size(881, 20);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 68);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 63);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 573);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 577);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(881, 68);
+            this.barDockControlRight.Location = new System.Drawing.Point(881, 63);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 573);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 577);
             // 
             // barLargeButtonItem1
             // 
@@ -300,7 +301,8 @@
             // 
             // defaultLookAndFeel1
             // 
-            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Sharp Plus";
+            this.defaultLookAndFeel1.LookAndFeel.SkinName = "Coffee";
+            this.defaultLookAndFeel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Office2003;
             // 
             // label1
             // 
@@ -321,6 +323,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QUANLYYEUCAU";
             this.Text = "Quản Lý Yêu Cầu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

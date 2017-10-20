@@ -33,6 +33,9 @@ namespace ITSERVICE.LQTOSQL
     partial void InsertACCOUNT(ACCOUNT instance);
     partial void UpdateACCOUNT(ACCOUNT instance);
     partial void DeleteACCOUNT(ACCOUNT instance);
+    partial void InsertTRANGTHAI_YC(TRANGTHAI_YC instance);
+    partial void UpdateTRANGTHAI_YC(TRANGTHAI_YC instance);
+    partial void DeleteTRANGTHAI_YC(TRANGTHAI_YC instance);
     partial void InsertCHUCVU(CHUCVU instance);
     partial void UpdateCHUCVU(CHUCVU instance);
     partial void DeleteCHUCVU(CHUCVU instance);
@@ -72,13 +75,10 @@ namespace ITSERVICE.LQTOSQL
     partial void InsertTINHTRANG_XN(TINHTRANG_XN instance);
     partial void UpdateTINHTRANG_XN(TINHTRANG_XN instance);
     partial void DeleteTINHTRANG_XN(TINHTRANG_XN instance);
-    partial void InsertTRANGTHAI_YC(TRANGTHAI_YC instance);
-    partial void UpdateTRANGTHAI_YC(TRANGTHAI_YC instance);
-    partial void DeleteTRANGTHAI_YC(TRANGTHAI_YC instance);
     #endregion
 		
 		public Data_itservicesDataContext() : 
-				base(global::ITSERVICE.Properties.Settings.Default.ITSERVICEConnectionString1, mappingSource)
+				base(global::ITSERVICE.Properties.Settings.Default.ITSERVICEConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -112,6 +112,14 @@ namespace ITSERVICE.LQTOSQL
 			get
 			{
 				return this.GetTable<ACCOUNT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TRANGTHAI_YC> TRANGTHAI_YCs
+		{
+			get
+			{
+				return this.GetTable<TRANGTHAI_YC>();
 			}
 		}
 		
@@ -219,14 +227,6 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
-		public System.Data.Linq.Table<TRANGTHAI_YC> TRANGTHAI_YCs
-		{
-			get
-			{
-				return this.GetTable<TRANGTHAI_YC>();
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.PROC_KHACHHANG")]
 		public ISingleResult<PROC_KHACHHANGResult> PROC_KHACHHANG()
 		{
@@ -253,7 +253,15 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntityRef<KHACHHANG> _KHACHHANG;
 		
+		private EntityRef<KHACHHANG> _KHACHHANG1;
+		
+		private EntityRef<KHACHHANG> _KHACHHANG2;
+		
 		private EntityRef<LOAITK> _LOAITK;
+		
+		private EntityRef<LOAITK> _LOAITK1;
+		
+		private EntityRef<LOAITK> _LOAITK2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -274,7 +282,11 @@ namespace ITSERVICE.LQTOSQL
 		public ACCOUNT()
 		{
 			this._KHACHHANG = default(EntityRef<KHACHHANG>);
+			this._KHACHHANG1 = default(EntityRef<KHACHHANG>);
+			this._KHACHHANG2 = default(EntityRef<KHACHHANG>);
 			this._LOAITK = default(EntityRef<LOAITK>);
+			this._LOAITK1 = default(EntityRef<LOAITK>);
+			this._LOAITK2 = default(EntityRef<LOAITK>);
 			OnCreated();
 		}
 		
@@ -329,7 +341,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MALOAI_TK != value))
 				{
-					if (this._LOAITK.HasLoadedOrAssignedValue)
+					if (((this._LOAITK.HasLoadedOrAssignedValue || this._LOAITK1.HasLoadedOrAssignedValue) 
+								|| this._LOAITK2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -353,7 +366,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAKH != value))
 				{
-					if (this._KHACHHANG.HasLoadedOrAssignedValue)
+					if (((this._KHACHHANG.HasLoadedOrAssignedValue || this._KHACHHANG1.HasLoadedOrAssignedValue) 
+								|| this._KHACHHANG2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -420,6 +434,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_ACCOUNT1", Storage="_KHACHHANG1", ThisKey="MAKH", OtherKey="MAKH", IsForeignKey=true)]
+		public KHACHHANG KHACHHANG1
+		{
+			get
+			{
+				return this._KHACHHANG1.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG1.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG1.Entity = null;
+						previousValue.ACCOUNTs1.Remove(this);
+					}
+					this._KHACHHANG1.Entity = value;
+					if ((value != null))
+					{
+						value.ACCOUNTs1.Add(this);
+						this._MAKH = value.MAKH;
+					}
+					else
+					{
+						this._MAKH = default(string);
+					}
+					this.SendPropertyChanged("KHACHHANG1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_ACCOUNT2", Storage="_KHACHHANG2", ThisKey="MAKH", OtherKey="MAKH", IsForeignKey=true)]
+		public KHACHHANG KHACHHANG2
+		{
+			get
+			{
+				return this._KHACHHANG2.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG2.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG2.Entity = null;
+						previousValue.ACCOUNTs2.Remove(this);
+					}
+					this._KHACHHANG2.Entity = value;
+					if ((value != null))
+					{
+						value.ACCOUNTs2.Add(this);
+						this._MAKH = value.MAKH;
+					}
+					else
+					{
+						this._MAKH = default(string);
+					}
+					this.SendPropertyChanged("KHACHHANG2");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAITK_ACCOUNT", Storage="_LOAITK", ThisKey="MALOAI_TK", OtherKey="MALOAI_TK", IsForeignKey=true)]
 		public LOAITK LOAITK
 		{
@@ -454,6 +536,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAITK_ACCOUNT1", Storage="_LOAITK1", ThisKey="MALOAI_TK", OtherKey="MALOAI_TK", IsForeignKey=true)]
+		public LOAITK LOAITK1
+		{
+			get
+			{
+				return this._LOAITK1.Entity;
+			}
+			set
+			{
+				LOAITK previousValue = this._LOAITK1.Entity;
+				if (((previousValue != value) 
+							|| (this._LOAITK1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LOAITK1.Entity = null;
+						previousValue.ACCOUNTs1.Remove(this);
+					}
+					this._LOAITK1.Entity = value;
+					if ((value != null))
+					{
+						value.ACCOUNTs1.Add(this);
+						this._MALOAI_TK = value.MALOAI_TK;
+					}
+					else
+					{
+						this._MALOAI_TK = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("LOAITK1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAITK_ACCOUNT2", Storage="_LOAITK2", ThisKey="MALOAI_TK", OtherKey="MALOAI_TK", IsForeignKey=true)]
+		public LOAITK LOAITK2
+		{
+			get
+			{
+				return this._LOAITK2.Entity;
+			}
+			set
+			{
+				LOAITK previousValue = this._LOAITK2.Entity;
+				if (((previousValue != value) 
+							|| (this._LOAITK2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LOAITK2.Entity = null;
+						previousValue.ACCOUNTs2.Remove(this);
+					}
+					this._LOAITK2.Entity = value;
+					if ((value != null))
+					{
+						value.ACCOUNTs2.Add(this);
+						this._MALOAI_TK = value.MALOAI_TK;
+					}
+					else
+					{
+						this._MALOAI_TK = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("LOAITK2");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -475,6 +625,200 @@ namespace ITSERVICE.LQTOSQL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRANGTHAI_YC")]
+	public partial class TRANGTHAI_YC : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _MATT_YC;
+		
+		private string _TENTT_YC;
+		
+		private string _MOTA_TTYC;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs1;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMATT_YCChanging(string value);
+    partial void OnMATT_YCChanged();
+    partial void OnTENTT_YCChanging(string value);
+    partial void OnTENTT_YCChanged();
+    partial void OnMOTA_TTYCChanging(string value);
+    partial void OnMOTA_TTYCChanged();
+    #endregion
+		
+		public TRANGTHAI_YC()
+		{
+			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
+			this._PHIEU_YCs1 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs1), new Action<PHIEU_YC>(this.detach_PHIEU_YCs1));
+			this._PHIEU_YCs2 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs2), new Action<PHIEU_YC>(this.detach_PHIEU_YCs2));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATT_YC", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MATT_YC
+		{
+			get
+			{
+				return this._MATT_YC;
+			}
+			set
+			{
+				if ((this._MATT_YC != value))
+				{
+					this.OnMATT_YCChanging(value);
+					this.SendPropertyChanging();
+					this._MATT_YC = value;
+					this.SendPropertyChanged("MATT_YC");
+					this.OnMATT_YCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENTT_YC", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TENTT_YC
+		{
+			get
+			{
+				return this._TENTT_YC;
+			}
+			set
+			{
+				if ((this._TENTT_YC != value))
+				{
+					this.OnTENTT_YCChanging(value);
+					this.SendPropertyChanging();
+					this._TENTT_YC = value;
+					this.SendPropertyChanged("TENTT_YC");
+					this.OnTENTT_YCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MOTA_TTYC", DbType="NVarChar(200)")]
+		public string MOTA_TTYC
+		{
+			get
+			{
+				return this._MOTA_TTYC;
+			}
+			set
+			{
+				if ((this._MOTA_TTYC != value))
+				{
+					this.OnMOTA_TTYCChanging(value);
+					this.SendPropertyChanging();
+					this._MOTA_TTYC = value;
+					this.SendPropertyChanged("MOTA_TTYC");
+					this.OnMOTA_TTYCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC", Storage="_PHIEU_YCs", ThisKey="MATT_YC", OtherKey="MATT_YC")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs
+		{
+			get
+			{
+				return this._PHIEU_YCs;
+			}
+			set
+			{
+				this._PHIEU_YCs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC1", Storage="_PHIEU_YCs1", ThisKey="MATT_YC", OtherKey="MATT_YC")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs1
+		{
+			get
+			{
+				return this._PHIEU_YCs1;
+			}
+			set
+			{
+				this._PHIEU_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC2", Storage="_PHIEU_YCs2", ThisKey="MATT_YC", OtherKey="MATT_YC")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs2
+		{
+			get
+			{
+				return this._PHIEU_YCs2;
+			}
+			set
+			{
+				this._PHIEU_YCs2.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_PHIEU_YCs(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC = this;
+		}
+		
+		private void detach_PHIEU_YCs(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC = null;
+		}
+		
+		private void attach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC1 = this;
+		}
+		
+		private void detach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC1 = null;
+		}
+		
+		private void attach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC2 = this;
+		}
+		
+		private void detach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANGTHAI_YC2 = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CHUCVU")]
 	public partial class CHUCVU : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -488,6 +832,10 @@ namespace ITSERVICE.LQTOSQL
 		private string _MOTA_CHUCVU;
 		
 		private EntitySet<KHACHHANG> _KHACHHANGs;
+		
+		private EntitySet<KHACHHANG> _KHACHHANGs1;
+		
+		private EntitySet<KHACHHANG> _KHACHHANGs2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -504,6 +852,8 @@ namespace ITSERVICE.LQTOSQL
 		public CHUCVU()
 		{
 			this._KHACHHANGs = new EntitySet<KHACHHANG>(new Action<KHACHHANG>(this.attach_KHACHHANGs), new Action<KHACHHANG>(this.detach_KHACHHANGs));
+			this._KHACHHANGs1 = new EntitySet<KHACHHANG>(new Action<KHACHHANG>(this.attach_KHACHHANGs1), new Action<KHACHHANG>(this.detach_KHACHHANGs1));
+			this._KHACHHANGs2 = new EntitySet<KHACHHANG>(new Action<KHACHHANG>(this.attach_KHACHHANGs2), new Action<KHACHHANG>(this.detach_KHACHHANGs2));
 			OnCreated();
 		}
 		
@@ -580,6 +930,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CHUCVU_KHACHHANG1", Storage="_KHACHHANGs1", ThisKey="MACHUCVU", OtherKey="MACHUCVU")]
+		public EntitySet<KHACHHANG> KHACHHANGs1
+		{
+			get
+			{
+				return this._KHACHHANGs1;
+			}
+			set
+			{
+				this._KHACHHANGs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CHUCVU_KHACHHANG2", Storage="_KHACHHANGs2", ThisKey="MACHUCVU", OtherKey="MACHUCVU")]
+		public EntitySet<KHACHHANG> KHACHHANGs2
+		{
+			get
+			{
+				return this._KHACHHANGs2;
+			}
+			set
+			{
+				this._KHACHHANGs2.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -611,6 +987,30 @@ namespace ITSERVICE.LQTOSQL
 			this.SendPropertyChanging();
 			entity.CHUCVU = null;
 		}
+		
+		private void attach_KHACHHANGs1(KHACHHANG entity)
+		{
+			this.SendPropertyChanging();
+			entity.CHUCVU1 = this;
+		}
+		
+		private void detach_KHACHHANGs1(KHACHHANG entity)
+		{
+			this.SendPropertyChanging();
+			entity.CHUCVU1 = null;
+		}
+		
+		private void attach_KHACHHANGs2(KHACHHANG entity)
+		{
+			this.SendPropertyChanging();
+			entity.CHUCVU2 = this;
+		}
+		
+		private void detach_KHACHHANGs2(KHACHHANG entity)
+		{
+			this.SendPropertyChanging();
+			entity.CHUCVU2 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CONGVIEC")]
@@ -627,6 +1027,10 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<CTCV> _CTCVs;
 		
+		private EntitySet<CTCV> _CTCVs1;
+		
+		private EntitySet<CTCV> _CTCVs2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -642,6 +1046,8 @@ namespace ITSERVICE.LQTOSQL
 		public CONGVIEC()
 		{
 			this._CTCVs = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs), new Action<CTCV>(this.detach_CTCVs));
+			this._CTCVs1 = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs1), new Action<CTCV>(this.detach_CTCVs1));
+			this._CTCVs2 = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs2), new Action<CTCV>(this.detach_CTCVs2));
 			OnCreated();
 		}
 		
@@ -718,6 +1124,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONGVIEC_CTCV1", Storage="_CTCVs1", ThisKey="MACONGVIEC", OtherKey="MACONGVIEC")]
+		public EntitySet<CTCV> CTCVs1
+		{
+			get
+			{
+				return this._CTCVs1;
+			}
+			set
+			{
+				this._CTCVs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONGVIEC_CTCV2", Storage="_CTCVs2", ThisKey="MACONGVIEC", OtherKey="MACONGVIEC")]
+		public EntitySet<CTCV> CTCVs2
+		{
+			get
+			{
+				return this._CTCVs2;
+			}
+			set
+			{
+				this._CTCVs2.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -749,6 +1181,30 @@ namespace ITSERVICE.LQTOSQL
 			this.SendPropertyChanging();
 			entity.CONGVIEC = null;
 		}
+		
+		private void attach_CTCVs1(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONGVIEC1 = this;
+		}
+		
+		private void detach_CTCVs1(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONGVIEC1 = null;
+		}
+		
+		private void attach_CTCVs2(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONGVIEC2 = this;
+		}
+		
+		private void detach_CTCVs2(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONGVIEC2 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CTCV")]
@@ -767,7 +1223,15 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntityRef<CONGVIEC> _CONGVIEC;
 		
+		private EntityRef<CONGVIEC> _CONGVIEC1;
+		
+		private EntityRef<CONGVIEC> _CONGVIEC2;
+		
 		private EntityRef<PHIEU_YC> _PHIEU_YC;
+		
+		private EntityRef<PHIEU_YC> _PHIEU_YC1;
+		
+		private EntityRef<PHIEU_YC> _PHIEU_YC2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -786,7 +1250,11 @@ namespace ITSERVICE.LQTOSQL
 		public CTCV()
 		{
 			this._CONGVIEC = default(EntityRef<CONGVIEC>);
+			this._CONGVIEC1 = default(EntityRef<CONGVIEC>);
+			this._CONGVIEC2 = default(EntityRef<CONGVIEC>);
 			this._PHIEU_YC = default(EntityRef<PHIEU_YC>);
+			this._PHIEU_YC1 = default(EntityRef<PHIEU_YC>);
+			this._PHIEU_YC2 = default(EntityRef<PHIEU_YC>);
 			OnCreated();
 		}
 		
@@ -801,7 +1269,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAPYC != value))
 				{
-					if (this._PHIEU_YC.HasLoadedOrAssignedValue)
+					if (((this._PHIEU_YC.HasLoadedOrAssignedValue || this._PHIEU_YC1.HasLoadedOrAssignedValue) 
+								|| this._PHIEU_YC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -825,7 +1294,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MACONGVIEC != value))
 				{
-					if (this._CONGVIEC.HasLoadedOrAssignedValue)
+					if (((this._CONGVIEC.HasLoadedOrAssignedValue || this._CONGVIEC1.HasLoadedOrAssignedValue) 
+								|| this._CONGVIEC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -912,6 +1382,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONGVIEC_CTCV1", Storage="_CONGVIEC1", ThisKey="MACONGVIEC", OtherKey="MACONGVIEC", IsForeignKey=true)]
+		public CONGVIEC CONGVIEC1
+		{
+			get
+			{
+				return this._CONGVIEC1.Entity;
+			}
+			set
+			{
+				CONGVIEC previousValue = this._CONGVIEC1.Entity;
+				if (((previousValue != value) 
+							|| (this._CONGVIEC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CONGVIEC1.Entity = null;
+						previousValue.CTCVs1.Remove(this);
+					}
+					this._CONGVIEC1.Entity = value;
+					if ((value != null))
+					{
+						value.CTCVs1.Add(this);
+						this._MACONGVIEC = value.MACONGVIEC;
+					}
+					else
+					{
+						this._MACONGVIEC = default(string);
+					}
+					this.SendPropertyChanged("CONGVIEC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONGVIEC_CTCV2", Storage="_CONGVIEC2", ThisKey="MACONGVIEC", OtherKey="MACONGVIEC", IsForeignKey=true)]
+		public CONGVIEC CONGVIEC2
+		{
+			get
+			{
+				return this._CONGVIEC2.Entity;
+			}
+			set
+			{
+				CONGVIEC previousValue = this._CONGVIEC2.Entity;
+				if (((previousValue != value) 
+							|| (this._CONGVIEC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CONGVIEC2.Entity = null;
+						previousValue.CTCVs2.Remove(this);
+					}
+					this._CONGVIEC2.Entity = value;
+					if ((value != null))
+					{
+						value.CTCVs2.Add(this);
+						this._MACONGVIEC = value.MACONGVIEC;
+					}
+					else
+					{
+						this._MACONGVIEC = default(string);
+					}
+					this.SendPropertyChanged("CONGVIEC2");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_CTCV", Storage="_PHIEU_YC", ThisKey="MAPYC", OtherKey="MAPYC", IsForeignKey=true)]
 		public PHIEU_YC PHIEU_YC
 		{
@@ -942,6 +1480,74 @@ namespace ITSERVICE.LQTOSQL
 						this._MAPYC = default(string);
 					}
 					this.SendPropertyChanged("PHIEU_YC");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_CTCV1", Storage="_PHIEU_YC1", ThisKey="MAPYC", OtherKey="MAPYC", IsForeignKey=true)]
+		public PHIEU_YC PHIEU_YC1
+		{
+			get
+			{
+				return this._PHIEU_YC1.Entity;
+			}
+			set
+			{
+				PHIEU_YC previousValue = this._PHIEU_YC1.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIEU_YC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIEU_YC1.Entity = null;
+						previousValue.CTCVs1.Remove(this);
+					}
+					this._PHIEU_YC1.Entity = value;
+					if ((value != null))
+					{
+						value.CTCVs1.Add(this);
+						this._MAPYC = value.MAPYC;
+					}
+					else
+					{
+						this._MAPYC = default(string);
+					}
+					this.SendPropertyChanged("PHIEU_YC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_CTCV2", Storage="_PHIEU_YC2", ThisKey="MAPYC", OtherKey="MAPYC", IsForeignKey=true)]
+		public PHIEU_YC PHIEU_YC2
+		{
+			get
+			{
+				return this._PHIEU_YC2.Entity;
+			}
+			set
+			{
+				PHIEU_YC previousValue = this._PHIEU_YC2.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIEU_YC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIEU_YC2.Entity = null;
+						previousValue.CTCVs2.Remove(this);
+					}
+					this._PHIEU_YC2.Entity = value;
+					if ((value != null))
+					{
+						value.CTCVs2.Add(this);
+						this._MAPYC = value.MAPYC;
+					}
+					else
+					{
+						this._MAPYC = default(string);
+					}
+					this.SendPropertyChanged("PHIEU_YC2");
 				}
 			}
 		}
@@ -981,7 +1587,15 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntityRef<KITHUATVIEN> _KITHUATVIEN;
 		
+		private EntityRef<KITHUATVIEN> _KITHUATVIEN1;
+		
+		private EntityRef<KITHUATVIEN> _KITHUATVIEN2;
+		
 		private EntityRef<LINHVUC> _LINHVUC;
+		
+		private EntityRef<LINHVUC> _LINHVUC1;
+		
+		private EntityRef<LINHVUC> _LINHVUC2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -998,7 +1612,11 @@ namespace ITSERVICE.LQTOSQL
 		public CTKTV()
 		{
 			this._KITHUATVIEN = default(EntityRef<KITHUATVIEN>);
+			this._KITHUATVIEN1 = default(EntityRef<KITHUATVIEN>);
+			this._KITHUATVIEN2 = default(EntityRef<KITHUATVIEN>);
 			this._LINHVUC = default(EntityRef<LINHVUC>);
+			this._LINHVUC1 = default(EntityRef<LINHVUC>);
+			this._LINHVUC2 = default(EntityRef<LINHVUC>);
 			OnCreated();
 		}
 		
@@ -1013,7 +1631,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAKTV != value))
 				{
-					if (this._KITHUATVIEN.HasLoadedOrAssignedValue)
+					if (((this._KITHUATVIEN.HasLoadedOrAssignedValue || this._KITHUATVIEN1.HasLoadedOrAssignedValue) 
+								|| this._KITHUATVIEN2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1037,7 +1656,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MALV != value))
 				{
-					if (this._LINHVUC.HasLoadedOrAssignedValue)
+					if (((this._LINHVUC.HasLoadedOrAssignedValue || this._LINHVUC1.HasLoadedOrAssignedValue) 
+								|| this._LINHVUC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1104,6 +1724,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_CTKTV1", Storage="_KITHUATVIEN1", ThisKey="MAKTV", OtherKey="MAKTV", IsForeignKey=true)]
+		public KITHUATVIEN KITHUATVIEN1
+		{
+			get
+			{
+				return this._KITHUATVIEN1.Entity;
+			}
+			set
+			{
+				KITHUATVIEN previousValue = this._KITHUATVIEN1.Entity;
+				if (((previousValue != value) 
+							|| (this._KITHUATVIEN1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KITHUATVIEN1.Entity = null;
+						previousValue.CTKTVs1.Remove(this);
+					}
+					this._KITHUATVIEN1.Entity = value;
+					if ((value != null))
+					{
+						value.CTKTVs1.Add(this);
+						this._MAKTV = value.MAKTV;
+					}
+					else
+					{
+						this._MAKTV = default(string);
+					}
+					this.SendPropertyChanged("KITHUATVIEN1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_CTKTV2", Storage="_KITHUATVIEN2", ThisKey="MAKTV", OtherKey="MAKTV", IsForeignKey=true)]
+		public KITHUATVIEN KITHUATVIEN2
+		{
+			get
+			{
+				return this._KITHUATVIEN2.Entity;
+			}
+			set
+			{
+				KITHUATVIEN previousValue = this._KITHUATVIEN2.Entity;
+				if (((previousValue != value) 
+							|| (this._KITHUATVIEN2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KITHUATVIEN2.Entity = null;
+						previousValue.CTKTVs2.Remove(this);
+					}
+					this._KITHUATVIEN2.Entity = value;
+					if ((value != null))
+					{
+						value.CTKTVs2.Add(this);
+						this._MAKTV = value.MAKTV;
+					}
+					else
+					{
+						this._MAKTV = default(string);
+					}
+					this.SendPropertyChanged("KITHUATVIEN2");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_CTKTV", Storage="_LINHVUC", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
 		public LINHVUC LINHVUC
 		{
@@ -1134,6 +1822,74 @@ namespace ITSERVICE.LQTOSQL
 						this._MALV = default(string);
 					}
 					this.SendPropertyChanged("LINHVUC");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_CTKTV1", Storage="_LINHVUC1", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
+		public LINHVUC LINHVUC1
+		{
+			get
+			{
+				return this._LINHVUC1.Entity;
+			}
+			set
+			{
+				LINHVUC previousValue = this._LINHVUC1.Entity;
+				if (((previousValue != value) 
+							|| (this._LINHVUC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LINHVUC1.Entity = null;
+						previousValue.CTKTVs1.Remove(this);
+					}
+					this._LINHVUC1.Entity = value;
+					if ((value != null))
+					{
+						value.CTKTVs1.Add(this);
+						this._MALV = value.MALV;
+					}
+					else
+					{
+						this._MALV = default(string);
+					}
+					this.SendPropertyChanged("LINHVUC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_CTKTV2", Storage="_LINHVUC2", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
+		public LINHVUC LINHVUC2
+		{
+			get
+			{
+				return this._LINHVUC2.Entity;
+			}
+			set
+			{
+				LINHVUC previousValue = this._LINHVUC2.Entity;
+				if (((previousValue != value) 
+							|| (this._LINHVUC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LINHVUC2.Entity = null;
+						previousValue.CTKTVs2.Remove(this);
+					}
+					this._LINHVUC2.Entity = value;
+					if ((value != null))
+					{
+						value.CTKTVs2.Add(this);
+						this._MALV = value.MALV;
+					}
+					else
+					{
+						this._MALV = default(string);
+					}
+					this.SendPropertyChanged("LINHVUC2");
 				}
 			}
 		}
@@ -1179,9 +1935,21 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<PHIEU_YC> _PHIEU_YCs;
 		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs1;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs2;
+		
 		private EntityRef<LINHVUC> _LINHVUC;
 		
+		private EntityRef<LINHVUC> _LINHVUC1;
+		
+		private EntityRef<LINHVUC> _LINHVUC2;
+		
 		private EntityRef<LOAI_YC> _LOAI_YC;
+		
+		private EntityRef<LOAI_YC> _LOAI_YC1;
+		
+		private EntityRef<LOAI_YC> _LOAI_YC2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1204,8 +1972,14 @@ namespace ITSERVICE.LQTOSQL
 		public DANHMUC_YEUCAU()
 		{
 			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
+			this._PHIEU_YCs1 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs1), new Action<PHIEU_YC>(this.detach_PHIEU_YCs1));
+			this._PHIEU_YCs2 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs2), new Action<PHIEU_YC>(this.detach_PHIEU_YCs2));
 			this._LINHVUC = default(EntityRef<LINHVUC>);
+			this._LINHVUC1 = default(EntityRef<LINHVUC>);
+			this._LINHVUC2 = default(EntityRef<LINHVUC>);
 			this._LOAI_YC = default(EntityRef<LOAI_YC>);
+			this._LOAI_YC1 = default(EntityRef<LOAI_YC>);
+			this._LOAI_YC2 = default(EntityRef<LOAI_YC>);
 			OnCreated();
 		}
 		
@@ -1240,7 +2014,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MALOAI_YC != value))
 				{
-					if (this._LOAI_YC.HasLoadedOrAssignedValue)
+					if (((this._LOAI_YC.HasLoadedOrAssignedValue || this._LOAI_YC1.HasLoadedOrAssignedValue) 
+								|| this._LOAI_YC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1264,7 +2039,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MALV != value))
 				{
-					if (this._LINHVUC.HasLoadedOrAssignedValue)
+					if (((this._LINHVUC.HasLoadedOrAssignedValue || this._LINHVUC1.HasLoadedOrAssignedValue) 
+								|| this._LINHVUC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1350,6 +2126,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DANHMUC_YEUCAU_PHIEU_YC1", Storage="_PHIEU_YCs1", ThisKey="MADMYC", OtherKey="MADMYC")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs1
+		{
+			get
+			{
+				return this._PHIEU_YCs1;
+			}
+			set
+			{
+				this._PHIEU_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DANHMUC_YEUCAU_PHIEU_YC2", Storage="_PHIEU_YCs2", ThisKey="MADMYC", OtherKey="MADMYC")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs2
+		{
+			get
+			{
+				return this._PHIEU_YCs2;
+			}
+			set
+			{
+				this._PHIEU_YCs2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU", Storage="_LINHVUC", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
 		public LINHVUC LINHVUC
 		{
@@ -1380,6 +2182,74 @@ namespace ITSERVICE.LQTOSQL
 						this._MALV = default(string);
 					}
 					this.SendPropertyChanged("LINHVUC");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU1", Storage="_LINHVUC1", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
+		public LINHVUC LINHVUC1
+		{
+			get
+			{
+				return this._LINHVUC1.Entity;
+			}
+			set
+			{
+				LINHVUC previousValue = this._LINHVUC1.Entity;
+				if (((previousValue != value) 
+							|| (this._LINHVUC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LINHVUC1.Entity = null;
+						previousValue.DANHMUC_YEUCAUs1.Remove(this);
+					}
+					this._LINHVUC1.Entity = value;
+					if ((value != null))
+					{
+						value.DANHMUC_YEUCAUs1.Add(this);
+						this._MALV = value.MALV;
+					}
+					else
+					{
+						this._MALV = default(string);
+					}
+					this.SendPropertyChanged("LINHVUC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU2", Storage="_LINHVUC2", ThisKey="MALV", OtherKey="MALV", IsForeignKey=true)]
+		public LINHVUC LINHVUC2
+		{
+			get
+			{
+				return this._LINHVUC2.Entity;
+			}
+			set
+			{
+				LINHVUC previousValue = this._LINHVUC2.Entity;
+				if (((previousValue != value) 
+							|| (this._LINHVUC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LINHVUC2.Entity = null;
+						previousValue.DANHMUC_YEUCAUs2.Remove(this);
+					}
+					this._LINHVUC2.Entity = value;
+					if ((value != null))
+					{
+						value.DANHMUC_YEUCAUs2.Add(this);
+						this._MALV = value.MALV;
+					}
+					else
+					{
+						this._MALV = default(string);
+					}
+					this.SendPropertyChanged("LINHVUC2");
 				}
 			}
 		}
@@ -1418,6 +2288,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAI_YC_DANHMUC_YEUCAU1", Storage="_LOAI_YC1", ThisKey="MALOAI_YC", OtherKey="MALOAI_YC", IsForeignKey=true)]
+		public LOAI_YC LOAI_YC1
+		{
+			get
+			{
+				return this._LOAI_YC1.Entity;
+			}
+			set
+			{
+				LOAI_YC previousValue = this._LOAI_YC1.Entity;
+				if (((previousValue != value) 
+							|| (this._LOAI_YC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LOAI_YC1.Entity = null;
+						previousValue.DANHMUC_YEUCAUs1.Remove(this);
+					}
+					this._LOAI_YC1.Entity = value;
+					if ((value != null))
+					{
+						value.DANHMUC_YEUCAUs1.Add(this);
+						this._MALOAI_YC = value.MALOAI_YC;
+					}
+					else
+					{
+						this._MALOAI_YC = default(string);
+					}
+					this.SendPropertyChanged("LOAI_YC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAI_YC_DANHMUC_YEUCAU2", Storage="_LOAI_YC2", ThisKey="MALOAI_YC", OtherKey="MALOAI_YC", IsForeignKey=true)]
+		public LOAI_YC LOAI_YC2
+		{
+			get
+			{
+				return this._LOAI_YC2.Entity;
+			}
+			set
+			{
+				LOAI_YC previousValue = this._LOAI_YC2.Entity;
+				if (((previousValue != value) 
+							|| (this._LOAI_YC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LOAI_YC2.Entity = null;
+						previousValue.DANHMUC_YEUCAUs2.Remove(this);
+					}
+					this._LOAI_YC2.Entity = value;
+					if ((value != null))
+					{
+						value.DANHMUC_YEUCAUs2.Add(this);
+						this._MALOAI_YC = value.MALOAI_YC;
+					}
+					else
+					{
+						this._MALOAI_YC = default(string);
+					}
+					this.SendPropertyChanged("LOAI_YC2");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1449,6 +2387,30 @@ namespace ITSERVICE.LQTOSQL
 			this.SendPropertyChanging();
 			entity.DANHMUC_YEUCAU = null;
 		}
+		
+		private void attach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.DANHMUC_YEUCAU1 = this;
+		}
+		
+		private void detach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.DANHMUC_YEUCAU1 = null;
+		}
+		
+		private void attach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.DANHMUC_YEUCAU2 = this;
+		}
+		
+		private void detach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.DANHMUC_YEUCAU2 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KHACHHANG")]
@@ -1471,9 +2433,21 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<ACCOUNT> _ACCOUNTs;
 		
+		private EntitySet<ACCOUNT> _ACCOUNTs1;
+		
+		private EntitySet<ACCOUNT> _ACCOUNTs2;
+		
 		private EntitySet<PHIEU_YC> _PHIEU_YCs;
 		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs1;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs2;
+		
 		private EntityRef<CHUCVU> _CHUCVU;
+		
+		private EntityRef<CHUCVU> _CHUCVU1;
+		
+		private EntityRef<CHUCVU> _CHUCVU2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1496,8 +2470,14 @@ namespace ITSERVICE.LQTOSQL
 		public KHACHHANG()
 		{
 			this._ACCOUNTs = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs), new Action<ACCOUNT>(this.detach_ACCOUNTs));
+			this._ACCOUNTs1 = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs1), new Action<ACCOUNT>(this.detach_ACCOUNTs1));
+			this._ACCOUNTs2 = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs2), new Action<ACCOUNT>(this.detach_ACCOUNTs2));
 			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
+			this._PHIEU_YCs1 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs1), new Action<PHIEU_YC>(this.detach_PHIEU_YCs1));
+			this._PHIEU_YCs2 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs2), new Action<PHIEU_YC>(this.detach_PHIEU_YCs2));
 			this._CHUCVU = default(EntityRef<CHUCVU>);
+			this._CHUCVU1 = default(EntityRef<CHUCVU>);
+			this._CHUCVU2 = default(EntityRef<CHUCVU>);
 			OnCreated();
 		}
 		
@@ -1592,7 +2572,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MACHUCVU != value))
 				{
-					if (this._CHUCVU.HasLoadedOrAssignedValue)
+					if (((this._CHUCVU.HasLoadedOrAssignedValue || this._CHUCVU1.HasLoadedOrAssignedValue) 
+								|| this._CHUCVU2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1638,6 +2619,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_ACCOUNT1", Storage="_ACCOUNTs1", ThisKey="MAKH", OtherKey="MAKH")]
+		public EntitySet<ACCOUNT> ACCOUNTs1
+		{
+			get
+			{
+				return this._ACCOUNTs1;
+			}
+			set
+			{
+				this._ACCOUNTs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_ACCOUNT2", Storage="_ACCOUNTs2", ThisKey="MAKH", OtherKey="MAKH")]
+		public EntitySet<ACCOUNT> ACCOUNTs2
+		{
+			get
+			{
+				return this._ACCOUNTs2;
+			}
+			set
+			{
+				this._ACCOUNTs2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_PHIEU_YC", Storage="_PHIEU_YCs", ThisKey="MAKH", OtherKey="MAKH")]
 		public EntitySet<PHIEU_YC> PHIEU_YCs
 		{
@@ -1648,6 +2655,32 @@ namespace ITSERVICE.LQTOSQL
 			set
 			{
 				this._PHIEU_YCs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_PHIEU_YC1", Storage="_PHIEU_YCs1", ThisKey="MAKH", OtherKey="MAKH")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs1
+		{
+			get
+			{
+				return this._PHIEU_YCs1;
+			}
+			set
+			{
+				this._PHIEU_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_PHIEU_YC2", Storage="_PHIEU_YCs2", ThisKey="MAKH", OtherKey="MAKH")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs2
+		{
+			get
+			{
+				return this._PHIEU_YCs2;
+			}
+			set
+			{
+				this._PHIEU_YCs2.Assign(value);
 			}
 		}
 		
@@ -1685,6 +2718,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CHUCVU_KHACHHANG1", Storage="_CHUCVU1", ThisKey="MACHUCVU", OtherKey="MACHUCVU", IsForeignKey=true)]
+		public CHUCVU CHUCVU1
+		{
+			get
+			{
+				return this._CHUCVU1.Entity;
+			}
+			set
+			{
+				CHUCVU previousValue = this._CHUCVU1.Entity;
+				if (((previousValue != value) 
+							|| (this._CHUCVU1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CHUCVU1.Entity = null;
+						previousValue.KHACHHANGs1.Remove(this);
+					}
+					this._CHUCVU1.Entity = value;
+					if ((value != null))
+					{
+						value.KHACHHANGs1.Add(this);
+						this._MACHUCVU = value.MACHUCVU;
+					}
+					else
+					{
+						this._MACHUCVU = default(string);
+					}
+					this.SendPropertyChanged("CHUCVU1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CHUCVU_KHACHHANG2", Storage="_CHUCVU2", ThisKey="MACHUCVU", OtherKey="MACHUCVU", IsForeignKey=true)]
+		public CHUCVU CHUCVU2
+		{
+			get
+			{
+				return this._CHUCVU2.Entity;
+			}
+			set
+			{
+				CHUCVU previousValue = this._CHUCVU2.Entity;
+				if (((previousValue != value) 
+							|| (this._CHUCVU2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CHUCVU2.Entity = null;
+						previousValue.KHACHHANGs2.Remove(this);
+					}
+					this._CHUCVU2.Entity = value;
+					if ((value != null))
+					{
+						value.KHACHHANGs2.Add(this);
+						this._MACHUCVU = value.MACHUCVU;
+					}
+					else
+					{
+						this._MACHUCVU = default(string);
+					}
+					this.SendPropertyChanged("CHUCVU2");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1717,6 +2818,30 @@ namespace ITSERVICE.LQTOSQL
 			entity.KHACHHANG = null;
 		}
 		
+		private void attach_ACCOUNTs1(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG1 = this;
+		}
+		
+		private void detach_ACCOUNTs1(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG1 = null;
+		}
+		
+		private void attach_ACCOUNTs2(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG2 = this;
+		}
+		
+		private void detach_ACCOUNTs2(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG2 = null;
+		}
+		
 		private void attach_PHIEU_YCs(PHIEU_YC entity)
 		{
 			this.SendPropertyChanging();
@@ -1727,6 +2852,30 @@ namespace ITSERVICE.LQTOSQL
 		{
 			this.SendPropertyChanging();
 			entity.KHACHHANG = null;
+		}
+		
+		private void attach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG1 = this;
+		}
+		
+		private void detach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG1 = null;
+		}
+		
+		private void attach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG2 = this;
+		}
+		
+		private void detach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KHACHHANG2 = null;
 		}
 	}
 	
@@ -1748,7 +2897,15 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<CTKTV> _CTKTVs;
 		
+		private EntitySet<CTKTV> _CTKTVs1;
+		
+		private EntitySet<CTKTV> _CTKTVs2;
+		
 		private EntitySet<PHIEU_YC> _PHIEU_YCs;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs1;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1769,7 +2926,11 @@ namespace ITSERVICE.LQTOSQL
 		public KITHUATVIEN()
 		{
 			this._CTKTVs = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs), new Action<CTKTV>(this.detach_CTKTVs));
+			this._CTKTVs1 = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs1), new Action<CTKTV>(this.detach_CTKTVs1));
+			this._CTKTVs2 = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs2), new Action<CTKTV>(this.detach_CTKTVs2));
 			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
+			this._PHIEU_YCs1 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs1), new Action<PHIEU_YC>(this.detach_PHIEU_YCs1));
+			this._PHIEU_YCs2 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs2), new Action<PHIEU_YC>(this.detach_PHIEU_YCs2));
 			OnCreated();
 		}
 		
@@ -1886,6 +3047,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_CTKTV1", Storage="_CTKTVs1", ThisKey="MAKTV", OtherKey="MAKTV")]
+		public EntitySet<CTKTV> CTKTVs1
+		{
+			get
+			{
+				return this._CTKTVs1;
+			}
+			set
+			{
+				this._CTKTVs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_CTKTV2", Storage="_CTKTVs2", ThisKey="MAKTV", OtherKey="MAKTV")]
+		public EntitySet<CTKTV> CTKTVs2
+		{
+			get
+			{
+				return this._CTKTVs2;
+			}
+			set
+			{
+				this._CTKTVs2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC", Storage="_PHIEU_YCs", ThisKey="MAKTV", OtherKey="MAKTV")]
 		public EntitySet<PHIEU_YC> PHIEU_YCs
 		{
@@ -1896,6 +3083,32 @@ namespace ITSERVICE.LQTOSQL
 			set
 			{
 				this._PHIEU_YCs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC1", Storage="_PHIEU_YCs1", ThisKey="MAKTV", OtherKey="MAKTV")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs1
+		{
+			get
+			{
+				return this._PHIEU_YCs1;
+			}
+			set
+			{
+				this._PHIEU_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC2", Storage="_PHIEU_YCs2", ThisKey="MAKTV", OtherKey="MAKTV")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs2
+		{
+			get
+			{
+				return this._PHIEU_YCs2;
+			}
+			set
+			{
+				this._PHIEU_YCs2.Assign(value);
 			}
 		}
 		
@@ -1931,6 +3144,30 @@ namespace ITSERVICE.LQTOSQL
 			entity.KITHUATVIEN = null;
 		}
 		
+		private void attach_CTKTVs1(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN1 = this;
+		}
+		
+		private void detach_CTKTVs1(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN1 = null;
+		}
+		
+		private void attach_CTKTVs2(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN2 = this;
+		}
+		
+		private void detach_CTKTVs2(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN2 = null;
+		}
+		
 		private void attach_PHIEU_YCs(PHIEU_YC entity)
 		{
 			this.SendPropertyChanging();
@@ -1941,6 +3178,30 @@ namespace ITSERVICE.LQTOSQL
 		{
 			this.SendPropertyChanging();
 			entity.KITHUATVIEN = null;
+		}
+		
+		private void attach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN1 = this;
+		}
+		
+		private void detach_PHIEU_YCs1(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN1 = null;
+		}
+		
+		private void attach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN2 = this;
+		}
+		
+		private void detach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.KITHUATVIEN2 = null;
 		}
 	}
 	
@@ -1958,7 +3219,15 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<CTKTV> _CTKTVs;
 		
+		private EntitySet<CTKTV> _CTKTVs1;
+		
+		private EntitySet<CTKTV> _CTKTVs2;
+		
 		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs;
+		
+		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs1;
+		
+		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1975,7 +3244,11 @@ namespace ITSERVICE.LQTOSQL
 		public LINHVUC()
 		{
 			this._CTKTVs = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs), new Action<CTKTV>(this.detach_CTKTVs));
+			this._CTKTVs1 = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs1), new Action<CTKTV>(this.detach_CTKTVs1));
+			this._CTKTVs2 = new EntitySet<CTKTV>(new Action<CTKTV>(this.attach_CTKTVs2), new Action<CTKTV>(this.detach_CTKTVs2));
 			this._DANHMUC_YEUCAUs = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs));
+			this._DANHMUC_YEUCAUs1 = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs1), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs1));
+			this._DANHMUC_YEUCAUs2 = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs2), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs2));
 			OnCreated();
 		}
 		
@@ -2052,6 +3325,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_CTKTV1", Storage="_CTKTVs1", ThisKey="MALV", OtherKey="MALV")]
+		public EntitySet<CTKTV> CTKTVs1
+		{
+			get
+			{
+				return this._CTKTVs1;
+			}
+			set
+			{
+				this._CTKTVs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_CTKTV2", Storage="_CTKTVs2", ThisKey="MALV", OtherKey="MALV")]
+		public EntitySet<CTKTV> CTKTVs2
+		{
+			get
+			{
+				return this._CTKTVs2;
+			}
+			set
+			{
+				this._CTKTVs2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU", Storage="_DANHMUC_YEUCAUs", ThisKey="MALV", OtherKey="MALV")]
 		public EntitySet<DANHMUC_YEUCAU> DANHMUC_YEUCAUs
 		{
@@ -2062,6 +3361,32 @@ namespace ITSERVICE.LQTOSQL
 			set
 			{
 				this._DANHMUC_YEUCAUs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU1", Storage="_DANHMUC_YEUCAUs1", ThisKey="MALV", OtherKey="MALV")]
+		public EntitySet<DANHMUC_YEUCAU> DANHMUC_YEUCAUs1
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAUs1;
+			}
+			set
+			{
+				this._DANHMUC_YEUCAUs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LINHVUC_DANHMUC_YEUCAU2", Storage="_DANHMUC_YEUCAUs2", ThisKey="MALV", OtherKey="MALV")]
+		public EntitySet<DANHMUC_YEUCAU> DANHMUC_YEUCAUs2
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAUs2;
+			}
+			set
+			{
+				this._DANHMUC_YEUCAUs2.Assign(value);
 			}
 		}
 		
@@ -2097,6 +3422,30 @@ namespace ITSERVICE.LQTOSQL
 			entity.LINHVUC = null;
 		}
 		
+		private void attach_CTKTVs1(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC1 = this;
+		}
+		
+		private void detach_CTKTVs1(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC1 = null;
+		}
+		
+		private void attach_CTKTVs2(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC2 = this;
+		}
+		
+		private void detach_CTKTVs2(CTKTV entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC2 = null;
+		}
+		
 		private void attach_DANHMUC_YEUCAUs(DANHMUC_YEUCAU entity)
 		{
 			this.SendPropertyChanging();
@@ -2107,6 +3456,30 @@ namespace ITSERVICE.LQTOSQL
 		{
 			this.SendPropertyChanging();
 			entity.LINHVUC = null;
+		}
+		
+		private void attach_DANHMUC_YEUCAUs1(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC1 = this;
+		}
+		
+		private void detach_DANHMUC_YEUCAUs1(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC1 = null;
+		}
+		
+		private void attach_DANHMUC_YEUCAUs2(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC2 = this;
+		}
+		
+		private void detach_DANHMUC_YEUCAUs2(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LINHVUC2 = null;
 		}
 	}
 	
@@ -2124,6 +3497,10 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs;
 		
+		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs1;
+		
+		private EntitySet<DANHMUC_YEUCAU> _DANHMUC_YEUCAUs2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2139,6 +3516,8 @@ namespace ITSERVICE.LQTOSQL
 		public LOAI_YC()
 		{
 			this._DANHMUC_YEUCAUs = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs));
+			this._DANHMUC_YEUCAUs1 = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs1), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs1));
+			this._DANHMUC_YEUCAUs2 = new EntitySet<DANHMUC_YEUCAU>(new Action<DANHMUC_YEUCAU>(this.attach_DANHMUC_YEUCAUs2), new Action<DANHMUC_YEUCAU>(this.detach_DANHMUC_YEUCAUs2));
 			OnCreated();
 		}
 		
@@ -2215,6 +3594,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAI_YC_DANHMUC_YEUCAU1", Storage="_DANHMUC_YEUCAUs1", ThisKey="MALOAI_YC", OtherKey="MALOAI_YC")]
+		public EntitySet<DANHMUC_YEUCAU> DANHMUC_YEUCAUs1
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAUs1;
+			}
+			set
+			{
+				this._DANHMUC_YEUCAUs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAI_YC_DANHMUC_YEUCAU2", Storage="_DANHMUC_YEUCAUs2", ThisKey="MALOAI_YC", OtherKey="MALOAI_YC")]
+		public EntitySet<DANHMUC_YEUCAU> DANHMUC_YEUCAUs2
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAUs2;
+			}
+			set
+			{
+				this._DANHMUC_YEUCAUs2.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2246,6 +3651,30 @@ namespace ITSERVICE.LQTOSQL
 			this.SendPropertyChanging();
 			entity.LOAI_YC = null;
 		}
+		
+		private void attach_DANHMUC_YEUCAUs1(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAI_YC1 = this;
+		}
+		
+		private void detach_DANHMUC_YEUCAUs1(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAI_YC1 = null;
+		}
+		
+		private void attach_DANHMUC_YEUCAUs2(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAI_YC2 = this;
+		}
+		
+		private void detach_DANHMUC_YEUCAUs2(DANHMUC_YEUCAU entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAI_YC2 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LOAITK")]
@@ -2260,6 +3689,10 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<ACCOUNT> _ACCOUNTs;
 		
+		private EntitySet<ACCOUNT> _ACCOUNTs1;
+		
+		private EntitySet<ACCOUNT> _ACCOUNTs2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2273,6 +3706,8 @@ namespace ITSERVICE.LQTOSQL
 		public LOAITK()
 		{
 			this._ACCOUNTs = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs), new Action<ACCOUNT>(this.detach_ACCOUNTs));
+			this._ACCOUNTs1 = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs1), new Action<ACCOUNT>(this.detach_ACCOUNTs1));
+			this._ACCOUNTs2 = new EntitySet<ACCOUNT>(new Action<ACCOUNT>(this.attach_ACCOUNTs2), new Action<ACCOUNT>(this.detach_ACCOUNTs2));
 			OnCreated();
 		}
 		
@@ -2329,6 +3764,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAITK_ACCOUNT1", Storage="_ACCOUNTs1", ThisKey="MALOAI_TK", OtherKey="MALOAI_TK")]
+		public EntitySet<ACCOUNT> ACCOUNTs1
+		{
+			get
+			{
+				return this._ACCOUNTs1;
+			}
+			set
+			{
+				this._ACCOUNTs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LOAITK_ACCOUNT2", Storage="_ACCOUNTs2", ThisKey="MALOAI_TK", OtherKey="MALOAI_TK")]
+		public EntitySet<ACCOUNT> ACCOUNTs2
+		{
+			get
+			{
+				return this._ACCOUNTs2;
+			}
+			set
+			{
+				this._ACCOUNTs2.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2359,6 +3820,30 @@ namespace ITSERVICE.LQTOSQL
 		{
 			this.SendPropertyChanging();
 			entity.LOAITK = null;
+		}
+		
+		private void attach_ACCOUNTs1(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAITK1 = this;
+		}
+		
+		private void detach_ACCOUNTs1(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAITK1 = null;
+		}
+		
+		private void attach_ACCOUNTs2(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAITK2 = this;
+		}
+		
+		private void detach_ACCOUNTs2(ACCOUNT entity)
+		{
+			this.SendPropertyChanging();
+			entity.LOAITK2 = null;
 		}
 	}
 	
@@ -2392,17 +3877,45 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<CTCV> _CTCVs;
 		
+		private EntitySet<CTCV> _CTCVs1;
+		
+		private EntitySet<CTCV> _CTCVs2;
+		
 		private EntitySet<PHIEUXACNHAN_YC> _PHIEUXACNHAN_YCs;
+		
+		private EntitySet<PHIEUXACNHAN_YC> _PHIEUXACNHAN_YCs1;
+		
+		private EntitySet<PHIEUXACNHAN_YC> _PHIEUXACNHAN_YCs2;
 		
 		private EntityRef<DANHMUC_YEUCAU> _DANHMUC_YEUCAU;
 		
+		private EntityRef<DANHMUC_YEUCAU> _DANHMUC_YEUCAU1;
+		
+		private EntityRef<DANHMUC_YEUCAU> _DANHMUC_YEUCAU2;
+		
 		private EntityRef<KHACHHANG> _KHACHHANG;
+		
+		private EntityRef<KHACHHANG> _KHACHHANG1;
+		
+		private EntityRef<KHACHHANG> _KHACHHANG2;
 		
 		private EntityRef<KITHUATVIEN> _KITHUATVIEN;
 		
-		private EntityRef<TINHTRANG_XN> _TINHTRANG_XN;
+		private EntityRef<KITHUATVIEN> _KITHUATVIEN1;
+		
+		private EntityRef<KITHUATVIEN> _KITHUATVIEN2;
 		
 		private EntityRef<TRANGTHAI_YC> _TRANGTHAI_YC;
+		
+		private EntityRef<TRANGTHAI_YC> _TRANGTHAI_YC1;
+		
+		private EntityRef<TRANGTHAI_YC> _TRANGTHAI_YC2;
+		
+		private EntityRef<TINHTRANG_XN> _TINHTRANG_XN;
+		
+		private EntityRef<TINHTRANG_XN> _TINHTRANG_XN1;
+		
+		private EntityRef<TINHTRANG_XN> _TINHTRANG_XN2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2435,12 +3948,26 @@ namespace ITSERVICE.LQTOSQL
 		public PHIEU_YC()
 		{
 			this._CTCVs = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs), new Action<CTCV>(this.detach_CTCVs));
+			this._CTCVs1 = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs1), new Action<CTCV>(this.detach_CTCVs1));
+			this._CTCVs2 = new EntitySet<CTCV>(new Action<CTCV>(this.attach_CTCVs2), new Action<CTCV>(this.detach_CTCVs2));
 			this._PHIEUXACNHAN_YCs = new EntitySet<PHIEUXACNHAN_YC>(new Action<PHIEUXACNHAN_YC>(this.attach_PHIEUXACNHAN_YCs), new Action<PHIEUXACNHAN_YC>(this.detach_PHIEUXACNHAN_YCs));
+			this._PHIEUXACNHAN_YCs1 = new EntitySet<PHIEUXACNHAN_YC>(new Action<PHIEUXACNHAN_YC>(this.attach_PHIEUXACNHAN_YCs1), new Action<PHIEUXACNHAN_YC>(this.detach_PHIEUXACNHAN_YCs1));
+			this._PHIEUXACNHAN_YCs2 = new EntitySet<PHIEUXACNHAN_YC>(new Action<PHIEUXACNHAN_YC>(this.attach_PHIEUXACNHAN_YCs2), new Action<PHIEUXACNHAN_YC>(this.detach_PHIEUXACNHAN_YCs2));
 			this._DANHMUC_YEUCAU = default(EntityRef<DANHMUC_YEUCAU>);
+			this._DANHMUC_YEUCAU1 = default(EntityRef<DANHMUC_YEUCAU>);
+			this._DANHMUC_YEUCAU2 = default(EntityRef<DANHMUC_YEUCAU>);
 			this._KHACHHANG = default(EntityRef<KHACHHANG>);
+			this._KHACHHANG1 = default(EntityRef<KHACHHANG>);
+			this._KHACHHANG2 = default(EntityRef<KHACHHANG>);
 			this._KITHUATVIEN = default(EntityRef<KITHUATVIEN>);
-			this._TINHTRANG_XN = default(EntityRef<TINHTRANG_XN>);
+			this._KITHUATVIEN1 = default(EntityRef<KITHUATVIEN>);
+			this._KITHUATVIEN2 = default(EntityRef<KITHUATVIEN>);
 			this._TRANGTHAI_YC = default(EntityRef<TRANGTHAI_YC>);
+			this._TRANGTHAI_YC1 = default(EntityRef<TRANGTHAI_YC>);
+			this._TRANGTHAI_YC2 = default(EntityRef<TRANGTHAI_YC>);
+			this._TINHTRANG_XN = default(EntityRef<TINHTRANG_XN>);
+			this._TINHTRANG_XN1 = default(EntityRef<TINHTRANG_XN>);
+			this._TINHTRANG_XN2 = default(EntityRef<TINHTRANG_XN>);
 			OnCreated();
 		}
 		
@@ -2515,7 +4042,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAKH != value))
 				{
-					if (this._KHACHHANG.HasLoadedOrAssignedValue)
+					if (((this._KHACHHANG.HasLoadedOrAssignedValue || this._KHACHHANG1.HasLoadedOrAssignedValue) 
+								|| this._KHACHHANG2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2539,7 +4067,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MADMYC != value))
 				{
-					if (this._DANHMUC_YEUCAU.HasLoadedOrAssignedValue)
+					if (((this._DANHMUC_YEUCAU.HasLoadedOrAssignedValue || this._DANHMUC_YEUCAU1.HasLoadedOrAssignedValue) 
+								|| this._DANHMUC_YEUCAU2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2563,7 +4092,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MATT_YC != value))
 				{
-					if (this._TRANGTHAI_YC.HasLoadedOrAssignedValue)
+					if (((this._TRANGTHAI_YC.HasLoadedOrAssignedValue || this._TRANGTHAI_YC1.HasLoadedOrAssignedValue) 
+								|| this._TRANGTHAI_YC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2587,7 +4117,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MATT_XN != value))
 				{
-					if (this._TINHTRANG_XN.HasLoadedOrAssignedValue)
+					if (((this._TINHTRANG_XN.HasLoadedOrAssignedValue || this._TINHTRANG_XN1.HasLoadedOrAssignedValue) 
+								|| this._TINHTRANG_XN2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2611,7 +4142,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAKTV != value))
 				{
-					if (this._KITHUATVIEN.HasLoadedOrAssignedValue)
+					if (((this._KITHUATVIEN.HasLoadedOrAssignedValue || this._KITHUATVIEN1.HasLoadedOrAssignedValue) 
+								|| this._KITHUATVIEN2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2697,6 +4229,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_CTCV1", Storage="_CTCVs1", ThisKey="MAPYC", OtherKey="MAPYC")]
+		public EntitySet<CTCV> CTCVs1
+		{
+			get
+			{
+				return this._CTCVs1;
+			}
+			set
+			{
+				this._CTCVs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_CTCV2", Storage="_CTCVs2", ThisKey="MAPYC", OtherKey="MAPYC")]
+		public EntitySet<CTCV> CTCVs2
+		{
+			get
+			{
+				return this._CTCVs2;
+			}
+			set
+			{
+				this._CTCVs2.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_PHIEUXACNHAN_YC", Storage="_PHIEUXACNHAN_YCs", ThisKey="MAPYC", OtherKey="MAPYC")]
 		public EntitySet<PHIEUXACNHAN_YC> PHIEUXACNHAN_YCs
 		{
@@ -2707,6 +4265,32 @@ namespace ITSERVICE.LQTOSQL
 			set
 			{
 				this._PHIEUXACNHAN_YCs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_PHIEUXACNHAN_YC1", Storage="_PHIEUXACNHAN_YCs1", ThisKey="MAPYC", OtherKey="MAPYC")]
+		public EntitySet<PHIEUXACNHAN_YC> PHIEUXACNHAN_YCs1
+		{
+			get
+			{
+				return this._PHIEUXACNHAN_YCs1;
+			}
+			set
+			{
+				this._PHIEUXACNHAN_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_PHIEUXACNHAN_YC2", Storage="_PHIEUXACNHAN_YCs2", ThisKey="MAPYC", OtherKey="MAPYC")]
+		public EntitySet<PHIEUXACNHAN_YC> PHIEUXACNHAN_YCs2
+		{
+			get
+			{
+				return this._PHIEUXACNHAN_YCs2;
+			}
+			set
+			{
+				this._PHIEUXACNHAN_YCs2.Assign(value);
 			}
 		}
 		
@@ -2740,6 +4324,74 @@ namespace ITSERVICE.LQTOSQL
 						this._MADMYC = default(string);
 					}
 					this.SendPropertyChanged("DANHMUC_YEUCAU");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DANHMUC_YEUCAU_PHIEU_YC1", Storage="_DANHMUC_YEUCAU1", ThisKey="MADMYC", OtherKey="MADMYC", IsForeignKey=true)]
+		public DANHMUC_YEUCAU DANHMUC_YEUCAU1
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAU1.Entity;
+			}
+			set
+			{
+				DANHMUC_YEUCAU previousValue = this._DANHMUC_YEUCAU1.Entity;
+				if (((previousValue != value) 
+							|| (this._DANHMUC_YEUCAU1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DANHMUC_YEUCAU1.Entity = null;
+						previousValue.PHIEU_YCs1.Remove(this);
+					}
+					this._DANHMUC_YEUCAU1.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs1.Add(this);
+						this._MADMYC = value.MADMYC;
+					}
+					else
+					{
+						this._MADMYC = default(string);
+					}
+					this.SendPropertyChanged("DANHMUC_YEUCAU1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DANHMUC_YEUCAU_PHIEU_YC2", Storage="_DANHMUC_YEUCAU2", ThisKey="MADMYC", OtherKey="MADMYC", IsForeignKey=true)]
+		public DANHMUC_YEUCAU DANHMUC_YEUCAU2
+		{
+			get
+			{
+				return this._DANHMUC_YEUCAU2.Entity;
+			}
+			set
+			{
+				DANHMUC_YEUCAU previousValue = this._DANHMUC_YEUCAU2.Entity;
+				if (((previousValue != value) 
+							|| (this._DANHMUC_YEUCAU2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DANHMUC_YEUCAU2.Entity = null;
+						previousValue.PHIEU_YCs2.Remove(this);
+					}
+					this._DANHMUC_YEUCAU2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs2.Add(this);
+						this._MADMYC = value.MADMYC;
+					}
+					else
+					{
+						this._MADMYC = default(string);
+					}
+					this.SendPropertyChanged("DANHMUC_YEUCAU2");
 				}
 			}
 		}
@@ -2778,6 +4430,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_PHIEU_YC1", Storage="_KHACHHANG1", ThisKey="MAKH", OtherKey="MAKH", IsForeignKey=true)]
+		public KHACHHANG KHACHHANG1
+		{
+			get
+			{
+				return this._KHACHHANG1.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG1.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG1.Entity = null;
+						previousValue.PHIEU_YCs1.Remove(this);
+					}
+					this._KHACHHANG1.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs1.Add(this);
+						this._MAKH = value.MAKH;
+					}
+					else
+					{
+						this._MAKH = default(string);
+					}
+					this.SendPropertyChanged("KHACHHANG1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KHACHHANG_PHIEU_YC2", Storage="_KHACHHANG2", ThisKey="MAKH", OtherKey="MAKH", IsForeignKey=true)]
+		public KHACHHANG KHACHHANG2
+		{
+			get
+			{
+				return this._KHACHHANG2.Entity;
+			}
+			set
+			{
+				KHACHHANG previousValue = this._KHACHHANG2.Entity;
+				if (((previousValue != value) 
+							|| (this._KHACHHANG2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KHACHHANG2.Entity = null;
+						previousValue.PHIEU_YCs2.Remove(this);
+					}
+					this._KHACHHANG2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs2.Add(this);
+						this._MAKH = value.MAKH;
+					}
+					else
+					{
+						this._MAKH = default(string);
+					}
+					this.SendPropertyChanged("KHACHHANG2");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC", Storage="_KITHUATVIEN", ThisKey="MAKTV", OtherKey="MAKTV", IsForeignKey=true)]
 		public KITHUATVIEN KITHUATVIEN
 		{
@@ -2812,36 +4532,70 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC", Storage="_TINHTRANG_XN", ThisKey="MATT_XN", OtherKey="MATT_XN", IsForeignKey=true)]
-		public TINHTRANG_XN TINHTRANG_XN
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC1", Storage="_KITHUATVIEN1", ThisKey="MAKTV", OtherKey="MAKTV", IsForeignKey=true)]
+		public KITHUATVIEN KITHUATVIEN1
 		{
 			get
 			{
-				return this._TINHTRANG_XN.Entity;
+				return this._KITHUATVIEN1.Entity;
 			}
 			set
 			{
-				TINHTRANG_XN previousValue = this._TINHTRANG_XN.Entity;
+				KITHUATVIEN previousValue = this._KITHUATVIEN1.Entity;
 				if (((previousValue != value) 
-							|| (this._TINHTRANG_XN.HasLoadedOrAssignedValue == false)))
+							|| (this._KITHUATVIEN1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._TINHTRANG_XN.Entity = null;
-						previousValue.PHIEU_YCs.Remove(this);
+						this._KITHUATVIEN1.Entity = null;
+						previousValue.PHIEU_YCs1.Remove(this);
 					}
-					this._TINHTRANG_XN.Entity = value;
+					this._KITHUATVIEN1.Entity = value;
 					if ((value != null))
 					{
-						value.PHIEU_YCs.Add(this);
-						this._MATT_XN = value.MATT_XN;
+						value.PHIEU_YCs1.Add(this);
+						this._MAKTV = value.MAKTV;
 					}
 					else
 					{
-						this._MATT_XN = default(string);
+						this._MAKTV = default(string);
 					}
-					this.SendPropertyChanged("TINHTRANG_XN");
+					this.SendPropertyChanged("KITHUATVIEN1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="KITHUATVIEN_PHIEU_YC2", Storage="_KITHUATVIEN2", ThisKey="MAKTV", OtherKey="MAKTV", IsForeignKey=true)]
+		public KITHUATVIEN KITHUATVIEN2
+		{
+			get
+			{
+				return this._KITHUATVIEN2.Entity;
+			}
+			set
+			{
+				KITHUATVIEN previousValue = this._KITHUATVIEN2.Entity;
+				if (((previousValue != value) 
+							|| (this._KITHUATVIEN2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._KITHUATVIEN2.Entity = null;
+						previousValue.PHIEU_YCs2.Remove(this);
+					}
+					this._KITHUATVIEN2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs2.Add(this);
+						this._MAKTV = value.MAKTV;
+					}
+					else
+					{
+						this._MAKTV = default(string);
+					}
+					this.SendPropertyChanged("KITHUATVIEN2");
 				}
 			}
 		}
@@ -2880,6 +4634,176 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC1", Storage="_TRANGTHAI_YC1", ThisKey="MATT_YC", OtherKey="MATT_YC", IsForeignKey=true)]
+		public TRANGTHAI_YC TRANGTHAI_YC1
+		{
+			get
+			{
+				return this._TRANGTHAI_YC1.Entity;
+			}
+			set
+			{
+				TRANGTHAI_YC previousValue = this._TRANGTHAI_YC1.Entity;
+				if (((previousValue != value) 
+							|| (this._TRANGTHAI_YC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TRANGTHAI_YC1.Entity = null;
+						previousValue.PHIEU_YCs1.Remove(this);
+					}
+					this._TRANGTHAI_YC1.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs1.Add(this);
+						this._MATT_YC = value.MATT_YC;
+					}
+					else
+					{
+						this._MATT_YC = default(string);
+					}
+					this.SendPropertyChanged("TRANGTHAI_YC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC2", Storage="_TRANGTHAI_YC2", ThisKey="MATT_YC", OtherKey="MATT_YC", IsForeignKey=true)]
+		public TRANGTHAI_YC TRANGTHAI_YC2
+		{
+			get
+			{
+				return this._TRANGTHAI_YC2.Entity;
+			}
+			set
+			{
+				TRANGTHAI_YC previousValue = this._TRANGTHAI_YC2.Entity;
+				if (((previousValue != value) 
+							|| (this._TRANGTHAI_YC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TRANGTHAI_YC2.Entity = null;
+						previousValue.PHIEU_YCs2.Remove(this);
+					}
+					this._TRANGTHAI_YC2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs2.Add(this);
+						this._MATT_YC = value.MATT_YC;
+					}
+					else
+					{
+						this._MATT_YC = default(string);
+					}
+					this.SendPropertyChanged("TRANGTHAI_YC2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC", Storage="_TINHTRANG_XN", ThisKey="MATT_XN", OtherKey="MATT_XN", IsForeignKey=true)]
+		public TINHTRANG_XN TINHTRANG_XN
+		{
+			get
+			{
+				return this._TINHTRANG_XN.Entity;
+			}
+			set
+			{
+				TINHTRANG_XN previousValue = this._TINHTRANG_XN.Entity;
+				if (((previousValue != value) 
+							|| (this._TINHTRANG_XN.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TINHTRANG_XN.Entity = null;
+						previousValue.PHIEU_YCs.Remove(this);
+					}
+					this._TINHTRANG_XN.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs.Add(this);
+						this._MATT_XN = value.MATT_XN;
+					}
+					else
+					{
+						this._MATT_XN = default(string);
+					}
+					this.SendPropertyChanged("TINHTRANG_XN");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC1", Storage="_TINHTRANG_XN1", ThisKey="MATT_XN", OtherKey="MATT_XN", IsForeignKey=true)]
+		public TINHTRANG_XN TINHTRANG_XN1
+		{
+			get
+			{
+				return this._TINHTRANG_XN1.Entity;
+			}
+			set
+			{
+				TINHTRANG_XN previousValue = this._TINHTRANG_XN1.Entity;
+				if (((previousValue != value) 
+							|| (this._TINHTRANG_XN1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TINHTRANG_XN1.Entity = null;
+						previousValue.PHIEU_YCs1.Remove(this);
+					}
+					this._TINHTRANG_XN1.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs1.Add(this);
+						this._MATT_XN = value.MATT_XN;
+					}
+					else
+					{
+						this._MATT_XN = default(string);
+					}
+					this.SendPropertyChanged("TINHTRANG_XN1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC2", Storage="_TINHTRANG_XN2", ThisKey="MATT_XN", OtherKey="MATT_XN", IsForeignKey=true)]
+		public TINHTRANG_XN TINHTRANG_XN2
+		{
+			get
+			{
+				return this._TINHTRANG_XN2.Entity;
+			}
+			set
+			{
+				TINHTRANG_XN previousValue = this._TINHTRANG_XN2.Entity;
+				if (((previousValue != value) 
+							|| (this._TINHTRANG_XN2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TINHTRANG_XN2.Entity = null;
+						previousValue.PHIEU_YCs2.Remove(this);
+					}
+					this._TINHTRANG_XN2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEU_YCs2.Add(this);
+						this._MATT_XN = value.MATT_XN;
+					}
+					else
+					{
+						this._MATT_XN = default(string);
+					}
+					this.SendPropertyChanged("TINHTRANG_XN2");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2912,6 +4836,30 @@ namespace ITSERVICE.LQTOSQL
 			entity.PHIEU_YC = null;
 		}
 		
+		private void attach_CTCVs1(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC1 = this;
+		}
+		
+		private void detach_CTCVs1(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC1 = null;
+		}
+		
+		private void attach_CTCVs2(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC2 = this;
+		}
+		
+		private void detach_CTCVs2(CTCV entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC2 = null;
+		}
+		
 		private void attach_PHIEUXACNHAN_YCs(PHIEUXACNHAN_YC entity)
 		{
 			this.SendPropertyChanging();
@@ -2922,6 +4870,30 @@ namespace ITSERVICE.LQTOSQL
 		{
 			this.SendPropertyChanging();
 			entity.PHIEU_YC = null;
+		}
+		
+		private void attach_PHIEUXACNHAN_YCs1(PHIEUXACNHAN_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC1 = this;
+		}
+		
+		private void detach_PHIEUXACNHAN_YCs1(PHIEUXACNHAN_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC1 = null;
+		}
+		
+		private void attach_PHIEUXACNHAN_YCs2(PHIEUXACNHAN_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC2 = this;
+		}
+		
+		private void detach_PHIEUXACNHAN_YCs2(PHIEUXACNHAN_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.PHIEU_YC2 = null;
 		}
 	}
 	
@@ -2945,6 +4917,10 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntityRef<PHIEU_YC> _PHIEU_YC;
 		
+		private EntityRef<PHIEU_YC> _PHIEU_YC1;
+		
+		private EntityRef<PHIEU_YC> _PHIEU_YC2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2966,6 +4942,8 @@ namespace ITSERVICE.LQTOSQL
 		public PHIEUXACNHAN_YC()
 		{
 			this._PHIEU_YC = default(EntityRef<PHIEU_YC>);
+			this._PHIEU_YC1 = default(EntityRef<PHIEU_YC>);
+			this._PHIEU_YC2 = default(EntityRef<PHIEU_YC>);
 			OnCreated();
 		}
 		
@@ -3060,7 +5038,8 @@ namespace ITSERVICE.LQTOSQL
 			{
 				if ((this._MAPYC != value))
 				{
-					if (this._PHIEU_YC.HasLoadedOrAssignedValue)
+					if (((this._PHIEU_YC.HasLoadedOrAssignedValue || this._PHIEU_YC1.HasLoadedOrAssignedValue) 
+								|| this._PHIEU_YC2.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -3127,6 +5106,74 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_PHIEUXACNHAN_YC1", Storage="_PHIEU_YC1", ThisKey="MAPYC", OtherKey="MAPYC", IsForeignKey=true)]
+		public PHIEU_YC PHIEU_YC1
+		{
+			get
+			{
+				return this._PHIEU_YC1.Entity;
+			}
+			set
+			{
+				PHIEU_YC previousValue = this._PHIEU_YC1.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIEU_YC1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIEU_YC1.Entity = null;
+						previousValue.PHIEUXACNHAN_YCs1.Remove(this);
+					}
+					this._PHIEU_YC1.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEUXACNHAN_YCs1.Add(this);
+						this._MAPYC = value.MAPYC;
+					}
+					else
+					{
+						this._MAPYC = default(string);
+					}
+					this.SendPropertyChanged("PHIEU_YC1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PHIEU_YC_PHIEUXACNHAN_YC2", Storage="_PHIEU_YC2", ThisKey="MAPYC", OtherKey="MAPYC", IsForeignKey=true)]
+		public PHIEU_YC PHIEU_YC2
+		{
+			get
+			{
+				return this._PHIEU_YC2.Entity;
+			}
+			set
+			{
+				PHIEU_YC previousValue = this._PHIEU_YC2.Entity;
+				if (((previousValue != value) 
+							|| (this._PHIEU_YC2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PHIEU_YC2.Entity = null;
+						previousValue.PHIEUXACNHAN_YCs2.Remove(this);
+					}
+					this._PHIEU_YC2.Entity = value;
+					if ((value != null))
+					{
+						value.PHIEUXACNHAN_YCs2.Add(this);
+						this._MAPYC = value.MAPYC;
+					}
+					else
+					{
+						this._MAPYC = default(string);
+					}
+					this.SendPropertyChanged("PHIEU_YC2");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3162,6 +5209,10 @@ namespace ITSERVICE.LQTOSQL
 		
 		private EntitySet<PHIEU_YC> _PHIEU_YCs;
 		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs1;
+		
+		private EntitySet<PHIEU_YC> _PHIEU_YCs2;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3177,6 +5228,8 @@ namespace ITSERVICE.LQTOSQL
 		public TINHTRANG_XN()
 		{
 			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
+			this._PHIEU_YCs1 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs1), new Action<PHIEU_YC>(this.detach_PHIEU_YCs1));
+			this._PHIEU_YCs2 = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs2), new Action<PHIEU_YC>(this.detach_PHIEU_YCs2));
 			OnCreated();
 		}
 		
@@ -3253,6 +5306,32 @@ namespace ITSERVICE.LQTOSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC1", Storage="_PHIEU_YCs1", ThisKey="MATT_XN", OtherKey="MATT_XN")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs1
+		{
+			get
+			{
+				return this._PHIEU_YCs1;
+			}
+			set
+			{
+				this._PHIEU_YCs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TINHTRANG_XN_PHIEU_YC2", Storage="_PHIEU_YCs2", ThisKey="MATT_XN", OtherKey="MATT_XN")]
+		public EntitySet<PHIEU_YC> PHIEU_YCs2
+		{
+			get
+			{
+				return this._PHIEU_YCs2;
+			}
+			set
+			{
+				this._PHIEU_YCs2.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3284,143 +5363,29 @@ namespace ITSERVICE.LQTOSQL
 			this.SendPropertyChanging();
 			entity.TINHTRANG_XN = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRANGTHAI_YC")]
-	public partial class TRANGTHAI_YC : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _MATT_YC;
-		
-		private string _TENTT_YC;
-		
-		private string _MOTA_TTYC;
-		
-		private EntitySet<PHIEU_YC> _PHIEU_YCs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMATT_YCChanging(string value);
-    partial void OnMATT_YCChanged();
-    partial void OnTENTT_YCChanging(string value);
-    partial void OnTENTT_YCChanged();
-    partial void OnMOTA_TTYCChanging(string value);
-    partial void OnMOTA_TTYCChanged();
-    #endregion
-		
-		public TRANGTHAI_YC()
-		{
-			this._PHIEU_YCs = new EntitySet<PHIEU_YC>(new Action<PHIEU_YC>(this.attach_PHIEU_YCs), new Action<PHIEU_YC>(this.detach_PHIEU_YCs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MATT_YC", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MATT_YC
-		{
-			get
-			{
-				return this._MATT_YC;
-			}
-			set
-			{
-				if ((this._MATT_YC != value))
-				{
-					this.OnMATT_YCChanging(value);
-					this.SendPropertyChanging();
-					this._MATT_YC = value;
-					this.SendPropertyChanged("MATT_YC");
-					this.OnMATT_YCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENTT_YC", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TENTT_YC
-		{
-			get
-			{
-				return this._TENTT_YC;
-			}
-			set
-			{
-				if ((this._TENTT_YC != value))
-				{
-					this.OnTENTT_YCChanging(value);
-					this.SendPropertyChanging();
-					this._TENTT_YC = value;
-					this.SendPropertyChanged("TENTT_YC");
-					this.OnTENTT_YCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MOTA_TTYC", DbType="NVarChar(200)")]
-		public string MOTA_TTYC
-		{
-			get
-			{
-				return this._MOTA_TTYC;
-			}
-			set
-			{
-				if ((this._MOTA_TTYC != value))
-				{
-					this.OnMOTA_TTYCChanging(value);
-					this.SendPropertyChanging();
-					this._MOTA_TTYC = value;
-					this.SendPropertyChanged("MOTA_TTYC");
-					this.OnMOTA_TTYCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANGTHAI_YC_PHIEU_YC", Storage="_PHIEU_YCs", ThisKey="MATT_YC", OtherKey="MATT_YC")]
-		public EntitySet<PHIEU_YC> PHIEU_YCs
-		{
-			get
-			{
-				return this._PHIEU_YCs;
-			}
-			set
-			{
-				this._PHIEU_YCs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_PHIEU_YCs(PHIEU_YC entity)
+		private void attach_PHIEU_YCs1(PHIEU_YC entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANGTHAI_YC = this;
+			entity.TINHTRANG_XN1 = this;
 		}
 		
-		private void detach_PHIEU_YCs(PHIEU_YC entity)
+		private void detach_PHIEU_YCs1(PHIEU_YC entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANGTHAI_YC = null;
+			entity.TINHTRANG_XN1 = null;
+		}
+		
+		private void attach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TINHTRANG_XN2 = this;
+		}
+		
+		private void detach_PHIEU_YCs2(PHIEU_YC entity)
+		{
+			this.SendPropertyChanging();
+			entity.TINHTRANG_XN2 = null;
 		}
 	}
 	

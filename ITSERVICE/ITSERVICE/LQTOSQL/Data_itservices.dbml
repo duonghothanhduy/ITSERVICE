@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ITSERVICE" Class="Data_itservicesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=THANHDUY\MSSSQL_DUY;Initial Catalog=ITSERVICE;Integrated Security=True" SettingsObjectName="ITSERVICE.Properties.Settings" SettingsPropertyName="ITSERVICEConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ACCOUNT" Member="ACCOUNTs">
+    <Type Name="ACCOUNT">
+      <Column Name="LOGINNAME_AC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PASSWORD_AC" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MALOAI_TK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MAKH" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="HIENHANH_AC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="KHACHHANG_ACCOUNT" Member="KHACHHANG" ThisKey="MAKH" OtherKey="MAKH" Type="KHACHHANG" IsForeignKey="true" />
+      <Association Name="LOAITK_ACCOUNT" Member="LOAITK" ThisKey="MALOAI_TK" OtherKey="MALOAI_TK" Type="LOAITK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CHUCVU" Member="CHUCVUs">
+    <Type Name="CHUCVU">
+      <Column Name="MACHUCVU" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENCHUCVU" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA_CHUCVU" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="CHUCVU_KHACHHANG" Member="KHACHHANGs" ThisKey="MACHUCVU" OtherKey="MACHUCVU" Type="KHACHHANG" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CONGVIEC" Member="CONGVIECs">
+    <Type Name="CONGVIEC">
+      <Column Name="MACONGVIEC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENCONGVIEC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HIENHANH_CONGVIEC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CONGVIEC_CTCV" Member="CTCVs" ThisKey="MACONGVIEC" OtherKey="MACONGVIEC" Type="CTCV" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTCV" Member="CTCVs">
+    <Type Name="CTCV">
+      <Column Name="MAPYC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MACONGVIEC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="THOIGIAN_THUCHIEN" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="HIENHANH_CTCV" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CONGVIEC_CTCV" Member="CONGVIEC" ThisKey="MACONGVIEC" OtherKey="MACONGVIEC" Type="CONGVIEC" IsForeignKey="true" />
+      <Association Name="PHIEU_YC_CTCV" Member="PHIEU_YC" ThisKey="MAPYC" OtherKey="MAPYC" Type="PHIEU_YC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTKTV" Member="CTKTVs">
+    <Type Name="CTKTV">
+      <Column Name="MAKTV" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MALV" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MOTA_NHOM_KTV" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="KITHUATVIEN_CTKTV" Member="KITHUATVIEN" ThisKey="MAKTV" OtherKey="MAKTV" Type="KITHUATVIEN" IsForeignKey="true" />
+      <Association Name="LINHVUC_CTKTV" Member="LINHVUC" ThisKey="MALV" OtherKey="MALV" Type="LINHVUC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DANHMUC_YEUCAU" Member="DANHMUC_YEUCAUs">
+    <Type Name="DANHMUC_YEUCAU">
+      <Column Name="MADMYC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MALOAI_YC" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MALV" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TIEUDE_DMYC" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA_DMYC" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="HIENHANH_DMYC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="DANHMUC_YEUCAU_PHIEU_YC" Member="PHIEU_YCs" ThisKey="MADMYC" OtherKey="MADMYC" Type="PHIEU_YC" />
+      <Association Name="LINHVUC_DANHMUC_YEUCAU" Member="LINHVUC" ThisKey="MALV" OtherKey="MALV" Type="LINHVUC" IsForeignKey="true" />
+      <Association Name="LOAI_YC_DANHMUC_YEUCAU" Member="LOAI_YC" ThisKey="MALOAI_YC" OtherKey="MALOAI_YC" Type="LOAI_YC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHACHHANG" Member="KHACHHANGs">
+    <Type Name="KHACHHANG">
+      <Column Name="MAKH" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HOTEN_KH" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL_KH" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SODTH_KH" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MACHUCVU" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="HIENHANH_KH" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="KHACHHANG_ACCOUNT" Member="ACCOUNTs" ThisKey="MAKH" OtherKey="MAKH" Type="ACCOUNT" />
+      <Association Name="KHACHHANG_PHIEU_YC" Member="PHIEU_YCs" ThisKey="MAKH" OtherKey="MAKH" Type="PHIEU_YC" />
+      <Association Name="CHUCVU_KHACHHANG" Member="CHUCVU" ThisKey="MACHUCVU" OtherKey="MACHUCVU" Type="CHUCVU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KITHUATVIEN" Member="KITHUATVIENs">
+    <Type Name="KITHUATVIEN">
+      <Column Name="MAKTV" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HOTEN_KTV" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL_KTV" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SODTH_KTV" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="HIENHANH_KTV" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="KITHUATVIEN_CTKTV" Member="CTKTVs" ThisKey="MAKTV" OtherKey="MAKTV" Type="CTKTV" />
+      <Association Name="KITHUATVIEN_PHIEU_YC" Member="PHIEU_YCs" ThisKey="MAKTV" OtherKey="MAKTV" Type="PHIEU_YC" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LINHVUC" Member="LINHVUCs">
+    <Type Name="LINHVUC">
+      <Column Name="MALV" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENLV" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HIENHANH_LV" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="LINHVUC_CTKTV" Member="CTKTVs" ThisKey="MALV" OtherKey="MALV" Type="CTKTV" />
+      <Association Name="LINHVUC_DANHMUC_YEUCAU" Member="DANHMUC_YEUCAUs" ThisKey="MALV" OtherKey="MALV" Type="DANHMUC_YEUCAU" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOAI_YC" Member="LOAI_YCs">
+    <Type Name="LOAI_YC">
+      <Column Name="MALOAI_YC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENLOAI_YC" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTALOAI_YC" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="LOAI_YC_DANHMUC_YEUCAU" Member="DANHMUC_YEUCAUs" ThisKey="MALOAI_YC" OtherKey="MALOAI_YC" Type="DANHMUC_YEUCAU" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOAITK" Member="LOAITKs">
+    <Type Name="LOAITK">
+      <Column Name="MALOAI_TK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENLOAI_TK" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="LOAITK_ACCOUNT" Member="ACCOUNTs" ThisKey="MALOAI_TK" OtherKey="MALOAI_TK" Type="ACCOUNT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHIEU_YC" Member="PHIEU_YCs">
+    <Type Name="PHIEU_YC">
+      <Column Name="MAPYC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TIEUDE_PYC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYLAP_PYC" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MAKH" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MADMYC" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MATT_YC" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MATT_XN" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MAKTV" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MOTA_PYC" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="GHICHU" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="HIENHANH_PYC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="PHIEU_YC_CTCV" Member="CTCVs" ThisKey="MAPYC" OtherKey="MAPYC" Type="CTCV" />
+      <Association Name="PHIEU_YC_PHIEUXACNHAN_YC" Member="PHIEUXACNHAN_YCs" ThisKey="MAPYC" OtherKey="MAPYC" Type="PHIEUXACNHAN_YC" />
+      <Association Name="DANHMUC_YEUCAU_PHIEU_YC" Member="DANHMUC_YEUCAU" ThisKey="MADMYC" OtherKey="MADMYC" Type="DANHMUC_YEUCAU" IsForeignKey="true" />
+      <Association Name="KHACHHANG_PHIEU_YC" Member="KHACHHANG" ThisKey="MAKH" OtherKey="MAKH" Type="KHACHHANG" IsForeignKey="true" />
+      <Association Name="KITHUATVIEN_PHIEU_YC" Member="KITHUATVIEN" ThisKey="MAKTV" OtherKey="MAKTV" Type="KITHUATVIEN" IsForeignKey="true" />
+      <Association Name="TINHTRANG_XN_PHIEU_YC" Member="TINHTRANG_XN" ThisKey="MATT_XN" OtherKey="MATT_XN" Type="TINHTRANG_XN" IsForeignKey="true" />
+      <Association Name="TRANGTHAI_YC_PHIEU_YC" Member="TRANGTHAI_YC" ThisKey="MATT_YC" OtherKey="MATT_YC" Type="TRANGTHAI_YC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PHIEUXACNHAN_YC" Member="PHIEUXACNHAN_YCs">
+    <Type Name="PHIEUXACNHAN_YC">
+      <Column Name="MAPHIEUXN_YC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NGAYLAP_PXN" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TIEUDE_XN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA_XN" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="MAPYC" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="HIENHANH_PXNYC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="PHIEU_YC_PHIEUXACNHAN_YC" Member="PHIEU_YC" ThisKey="MAPYC" OtherKey="MAPYC" Type="PHIEU_YC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TINHTRANG_XN" Member="TINHTRANG_XNs">
+    <Type Name="TINHTRANG_XN">
+      <Column Name="MATT_XN" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENTT_XN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA_TTXN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="TINHTRANG_XN_PHIEU_YC" Member="PHIEU_YCs" ThisKey="MATT_XN" OtherKey="MATT_XN" Type="PHIEU_YC" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TRANGTHAI_YC" Member="TRANGTHAI_YCs">
+    <Type Name="TRANGTHAI_YC">
+      <Column Name="MATT_YC" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TENTT_YC" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA_TTYC" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="TRANGTHAI_YC_PHIEU_YC" Member="PHIEU_YCs" ThisKey="MATT_YC" OtherKey="MATT_YC" Type="PHIEU_YC" />
+    </Type>
+  </Table>
+  <Function Name="dbo.PROC_KHACHHANG" Method="PROC_KHACHHANG">
+    <ElementType Name="PROC_KHACHHANGResult">
+      <Column Name="MAKH" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="HOTEN_KH" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="EMAIL_KH" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SODTH_KH" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TENCHUCVU" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

@@ -91,11 +91,6 @@
     <Compile Include="DANGNHAP.Designer.cs">
       <DependentUpon>DANGNHAP.cs</DependentUpon>
     </Compile>
-    <Compile Include="ITSERVICEDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ITSERVICEDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="KHACHHANG.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,10 +98,10 @@
       <DependentUpon>KHACHHANG.cs</DependentUpon>
     </Compile>
     <Compile Include="Class_checker_khachhang.cs" />
-    <Compile Include="LQTOSQL\Data_itservice.designer.cs">
+    <Compile Include="LQTOSQL\Data_itservices.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Data_itservice.dbml</DependentUpon>
+      <DependentUpon>Data_itservices.dbml</DependentUpon>
     </Compile>
     <Compile Include="Profiile.cs">
       <SubType>Form</SubType>
@@ -128,6 +123,9 @@
     <EmbeddedResource Include="KHACHHANG.resx">
       <DependentUpon>KHACHHANG.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="LQTOSQL\Data_itservices.dbml.layout">
+      <DependentUpon>Data_itservices.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Profiile.resx">
       <DependentUpon>Profiile.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,20 +133,6 @@
       <DependentUpon>Quanlyyeucau.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="ITSERVICEDataSet.xsc">
-      <DependentUpon>ITSERVICEDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ITSERVICEDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ITSERVICEDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ITSERVICEDataSet.xss">
-      <DependentUpon>ITSERVICEDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="LQTOSQL\Data_itservice.dbml.layout">
-      <DependentUpon>Data_itservice.dbml</DependentUpon>
-    </None>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -160,9 +144,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="LQTOSQL\Data_itservice.dbml">
+    <None Include="LQTOSQL\Data_itservices.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Data_itservice.designer.cs</LastGenOutput>
+      <LastGenOutput>Data_itservices.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">

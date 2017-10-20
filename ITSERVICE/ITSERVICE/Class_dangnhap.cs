@@ -19,9 +19,11 @@ namespace ITSERVICE
             
         }
         public static string chuoi = "";
+        
         public int f_dangnhap(string loginname,string password)
         {
-            ACCOUNT account = data.database().ACCOUNTs.SingleOrDefault(a => a.LOGINNAME_AC == loginname && a.PASSWORD_AC == password);
+            bool t = true;
+            ACCOUNT account = data.database().ACCOUNTs.SingleOrDefault(a => a.LOGINNAME_AC == loginname && a.PASSWORD_AC == password && a.HIENHANH_AC==t);
             if (account != null)
             {
                 return 1;

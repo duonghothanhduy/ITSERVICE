@@ -9,13 +9,13 @@ namespace ITSERVICE
 {
     class Class_connect
     {
-        Data_itserviceDataContext data;
+        Data_itservicesDataContext data;
         public Class_connect()
         {
-            data = new Data_itserviceDataContext();
+            data = new Data_itservicesDataContext();
         }
 
-        public Data_itserviceDataContext database()
+        public Data_itservicesDataContext database()
         {
             return data;
         }
